@@ -1,8 +1,17 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.associations": {
+      "*.html": "html",
+      "ios": "cpp",
+      "tuple": "cpp",
+      "iostream": "cpp",
+      "cmath": "cpp",
+      "vector": "cpp"
+    }
+  }
 }
