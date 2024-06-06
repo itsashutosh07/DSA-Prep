@@ -85,7 +85,7 @@ class Solution {
         // If i exists, then all element in its right are in decreasing order 
         // 1   3   5   5   2   2   1   0   0 
         //    idx      k
-        // Now find the rightmost index(idx) at right of i such that, nums[idx] > nums[i]
+        // Now find the rightmost index(k) at right of idx such that, nums[idx] < nums[k]
         
         // swap(nums[i], nums[idx])
         // 1  5  5  3  2  2  1  0  0 
@@ -108,14 +108,14 @@ class Solution {
             return;
         }
 
-        for (int i = n-1; i > idx; i--) {
-            if (nums[i] > nums[idx]) {
-                swap(nums[idx], nums[i]);
+        for (int k = n-1; k > idx; k--) {
+            if (nums[k] > nums[idx]) {
+                swap(nums[idx], nums[k]);
                 break;
             }
         }
 
-        reverse(nums.begin()+idx+1, nums.end());
+        reverse(nums.begin() + idx + 1, nums.end());
     }
 
 };
@@ -130,7 +130,7 @@ int main()
     vector<int> nums2 {1, 3, 5, 5};
     vector<int> nums3 {1, 3, 5, 1, 0, 0};
     vector<int> nums4 {5, 1, 0, 0};
-    vector<int> nums5 {1,2,5,6,5,5,4,3,1,1,1,1,0};
+    vector<int> nums5 {1,2,5,7,7,6,6,5,5,4,3,1,1,1,1,0};
 
     // Method Invocation
     sol.nextPermutation3(nums1);
