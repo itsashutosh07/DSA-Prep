@@ -88,7 +88,7 @@ class Solution {
         // Now find the rightmost index(k) at right of idx such that, nums[idx] < nums[k]
         
         // swap(nums[i], nums[idx])
-        // 1  5  5  3  2  2  1  0  0 
+        // 1  5  5  3  2  2  1  0  0 .
         //    |<--->|
         //    idx<->i
 
