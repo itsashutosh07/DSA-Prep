@@ -67,21 +67,24 @@ class Solution {
             else {
                 currSum += nums[i];
             }
-            /* Simply update max_sum if curr_sum is greater than it
+            /* 
+            // NORMAL CASE CODE
+            // Simply update max_sum if curr_sum is greater than max_sum
             if (currSum > maxSum) { 
                 maxSum = currSum;     
             }
             */
 
-            //
-            if (currSum > maxSum) {
+            // FOLLOW-UP CASE TO ALSO PRINT : MAX SUM LONGEST SUB-ARRAY
+            if (currSum > maxSum) { // update maxSum if currSum is greater
                 maxSum = currSum;       
-                printf("%d %d %d %d\n", i, s, end, start); // additional check to only update
+                printf("%d %d %d %d\n", i, s, end, start); // additional check to only update when 
                 start = s;
                 end = i;
                 
-            } else if (currSum == maxSum && (i - s) > (end - start)) {
-                printf("%d %d %d %d\n", i, s, end, start); // additional check to only update
+            } else if (currSum == maxSum && (i - s) > (end - start)) { // updated maxSum is equal to currSum
+                // additional check to only update start and end if longer sub-string is present
+                printf("%d %d %d %d\n", i, s, end, start);
                 start = s;
                 end = i;
             }
