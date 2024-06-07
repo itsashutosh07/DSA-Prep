@@ -21,9 +21,11 @@ struct TreeNode;
 
 /*
 DESCRIPTION :
+    Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
-
-
+Constraints:
+    -   1 <= nums.length <= 10^5
+    -   -10^4 <= nums[i] <= 10^4
 
 Example 1:
     Input: nums = [1,2,3]
@@ -37,8 +39,61 @@ Example 2:
 
 class Solution {
     public:
-    int maxSubArray(vector<int>& nums) {
+    int maxSubArray1(vector<int>& nums) {
+        int n = nums.size(), curr = INT_MIN, ans = nums[0];
+
+        for (int i = 0; i < n; i++) {
+            curr = nums[i];
+            if (curr > ans) ans = curr;
+            for (int j = i+1; j < n; j++) {
+                curr += nums[j];
+                if (curr > ans) ans = curr;
+            }
+        }
+        return ans;
         
+    }
+
+    int maxSubArray2(vector<int>& nums) {
+        int n = nums.size(), currSum = nums[0], maxSum = nums[0];
+        int s = 0; // potential start
+        int start = 0, end = 0; // actual start & end
+        for (int i = 1; i < n; i++) {
+            // Kadane's Algorithm
+            if (currSum < 0) {
+                currSum = nums[i];
+                s = i;
+            }
+            else {
+                currSum += nums[i];
+            }
+            /* Simply update max_sum if curr_sum is greater than it
+            if (currSum > maxSum) { 
+                maxSum = currSum;     
+            }
+            */
+
+            //
+            if (currSum > maxSum) {
+                maxSum = currSum;       
+                printf("%d %d %d %d\n", i, s, end, start); // additional check to only update
+                start = s;
+                end = i;
+                
+            } else if (currSum == maxSum && (i - s) > (end - start)) {
+                printf("%d %d %d %d\n", i, s, end, start); // additional check to only update
+                start = s;
+                end = i;
+            }
+        }
+
+        // Print maximum subarray
+        cout << "Maximum subarray: ";
+        for (int i = start; i <= end; i++) {
+            cout << nums[i] << " ";
+        }
+        cout << endl << "Max Sum: ";
+        return maxSum;
     }
 
 };
@@ -47,44 +102,39 @@ class Solution {
 int main() 
 {
     Solution sol;
-
     // Input Initialization
-    vector<int> nums1 {1, 3, 5, 5, 2, 1, 1, 0, 0};
-    vector<int> nums2 {1, 3, 5, 5};
-    vector<int> nums3 {1, 3, 5, 1, 0, 0};
-    vector<int> nums4 {5, 1, 0, 0};
-    vector<int> nums5 {1,2,5,7,7,6,6,5,5,4,3,1,1,1,1,0};
+    vector<int> nums1 {-2,1,-3,4,-1,2,1,-5,4};
+    vector<int> nums2 {1};
+    vector<int> nums3 {5,4,-1,7,8};
+    vector<int> nums4 {-10};
+    vector<int> nums5 {1,2,5,-7,7,6,-6,5,-15,-4,-3,1,1,1,8,3,-3};
 
-    // Method Invocation
-    sol.maxSubArray(nums1);
-    sol.maxSubArray(nums2);
-    sol.maxSubArray(nums3);
-    sol.maxSubArray(nums4);
-    sol.maxSubArray(nums5);
-    // sol.method_name(param2);
-
-
-    // Result Visualization
-    printVector(nums1);
-    printVector(nums2);
-    printVector(nums3);
-    printVector(nums4);
-    printVector(nums5);
-
+    // Method Invocation & Result Visualization
+    // cout << sol.maxSubArray2(nums1) << endl << endl;
+    // cout << sol.maxSubArray2(nums2) << endl << endl;
+    // cout << sol.maxSubArray2(nums3) << endl << endl;
+    // cout << sol.maxSubArray2(nums4) << endl << endl;
+    cout << sol.maxSubArray2(nums5) << endl << endl;
     return 0;
 }
 
 /*
 SOLUTIONS:-
 
-1. O(1) Space & O(n^3) TC | Brute Force
-traverse each element of matrix and for each element, 
+1. O(1) Space & O(n^2) TC | Brute Force
+    - use two pointer i,j approach to generate all possible find all contagious sub-arrays 
+    - find curr_sum for each starting element arr[i]
+    - updte max_sum if curr_sum > max_sum
+    - returm max_sum  
 
-2. O(n+m) Space & O(n^2) TC | Optimized
-
-
-3.  O(1) extra space & 2O(n^2) TC | OPTIMIZED
-
+2. O(1) extra space & O(n) TC | OPTIMIZED
+    - Watch pepCoding video on kadane's Algo
+    - For each element in nums, check if the element itself is greater than element + curr_sum (nums[i] > nums[i] + curr_sum)
+        - if this is the case then no need to continue the chain, i.e. start new chain of subArray starting from nums[i]
+    - Else, continue the chain of subArray by adding nums[i] into curr_sum (curr_sum += nums[i])
+    
+    - If curr_sum > max_sum then update max_sum 
+    - Return max_sum at the end
 
 */
 
