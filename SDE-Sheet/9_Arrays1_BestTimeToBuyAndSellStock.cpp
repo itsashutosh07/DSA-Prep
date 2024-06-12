@@ -60,6 +60,7 @@ class Solution {
         return maxP;
 
     }
+
     int maxProfit2(vector<int>& prices) {
         // TC: O(N) & SC: O(1)
         int maxP = 0, minPrice = 1e9, currP = 0;
@@ -70,7 +71,23 @@ class Solution {
         }
         return maxP;
     }
+    /*
+        - If the interviewer twists the question slightly by giving the difference array of prices, 
+            - Ex: for {1, 7, 4, 11}, if he gives {0, 6, -3, 7}.
+        - The logic to solve this problem would be same as "max subarray problem" using KADANE's ALGORITHM.
+        - Here, the logic is to calculate the difference (maxCur += prices[i] - prices[i-1]) of the original array, and find a contiguous subarray giving maximum profit. If the difference falls below 0, reset it to zero.
 
+
+        int maxProfit(vector<int>& prices) {
+            int maxCur = 0, maxSoFar = 0;
+            for(int i = 1; i < prices.size(); i++) {
+                maxCur = max(0, maxCur += prices[i] - prices[i-1]);
+                maxSoFar = max(maxCur, maxSoFar);
+            }
+            return maxSoFar;
+        }
+    
+    */
 };
 
 
