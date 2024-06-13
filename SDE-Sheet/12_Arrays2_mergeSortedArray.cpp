@@ -148,13 +148,37 @@ int main()
 /*
 SOLUTIONS:-
 
-1. O(1) Space & O(n^3) TC | Brute Force
-traverse each element of matrix and for each element, 
+1. O(1) Space & O(NlogN) TC | Brute Force
+    - add every element of nums2 to the end of nums1 in any order
+    - now sort the entire nums1 using stl sort method [TC: O(NlogN)]
 
-2. O(n+m) Space & O(n^2) TC | Optimized
+
+2. O(n+m) Space & O(2(n+m)) TC | Optimized
+    - create a temp array of size n+m
+    - from set i=0 & j=0 & k=0 denoting the beganning of nums1, nums2 & temp array respectivly
+    - while i < m && j < n 
+        - compare elements at nums1[i] with nums2[j]
+        - whichever is smaller goes to temp[k]
+    - this will add all elements till one array gets exhausted out of nums1/nums2
+    - thats why run 2 while loops in nums1: i->m & nums2: j->n, and add all remaining elements to temp array
+
+    - all elements in temp are now in sorted order so just blindly copy them back to num1 
+    - since we need the final result to be stored in nums1
 
 
-3.  O(1) extra space & 2O(n^2) TC | OPTIMIZED
+3.  O(1) extra space & O(n+m) TC | OPTIMIZED
+    - since we have extra space at the end of nums1 already present 
+    - then why not use a "last" pointer : last = n+m-1 (last valid index of nums1)
+    - to directly update the greater value out of the nums1 & nums2 to be placed directly at the 'last' of nums1 array
+    
+    - initialize i as the last valid index of nums1 : i = m-1 and go till i≥0 
+    - similarly, initialize j as the last valid of nums2 : j = n-1 and go till j≥0 
+    - while i≥0 && j≥0
+        - compare nums1[i] & nums2[j], whichever is greater put it at nums1[last]
+    - after the loop ends, all values of nums1/nums2 will get stored in nums1, 
+        - except if loop ends prematurely due to i reaching 0 first, leading j to still have some index > 0
+    - that means nums2[j] and its preceeding values are left to be copied to nums1[last] and its predecessors
+    - thus, copy all values of nums2[j] -> nums1[last] & decrement both pointers at the end of each iteration
 
 
 */
