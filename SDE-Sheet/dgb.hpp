@@ -1,12 +1,17 @@
 #include <iostream>
 #include <stack>
 #include <queue>
+#include <chrono>  // Include the chrono library
+
 using namespace std;
+using namespace std::chrono;  // Use the chrono namespace for convenience
 
 struct ListNode {
     int val;
     ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(NULL) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
 class Node {
@@ -64,6 +69,15 @@ void printVector(const vector<T>& vct, const string delim = " ", const string li
     for(size_t i = 0; i < vct.size(); i++)
     {
         cout << vct[i] << delim;
+    }
+    cout << linebreak;
+}
+
+template<typename T>
+void printArray(const T* arr, size_t size, const string delim = " ", const string linebreak = "\n") {
+    for(size_t i = 0; i < size; i++)
+    {
+        cout << arr[i] << delim;
     }
     cout << linebreak;
 }
@@ -129,7 +143,6 @@ void printList(ListNode* head, bool verbose = false) {
         printf("NULL head.\n");
         return;
     }
-
     while (head) {
         if (verbose)
             printf("%d:%p", head->val, head);
@@ -358,3 +371,51 @@ void printListWithChild(Node* h, bool verbose) {
 
     printf("\n");
 }
+
+// Function to measure and print the time taken by a sorting function (two-parameter version)
+void measureSortTime(void (*sortFunc)(int[], int), int arr[], int n, const string& sortName)
+{
+    int trials = 25;
+    double totalDuration = 0.0;
+
+    for (int t = 0; t < trials; t++) {
+        auto start = high_resolution_clock::now(); // Start the timer
+        sortFunc(arr, n);                          // Sort the original array
+        auto end = high_resolution_clock::now();   // End the timer
+
+        auto duration = duration_cast<microseconds>(end - start).count(); // Calculate duration in microseconds
+        totalDuration += duration;
+    }
+
+    double avgDurationMicroseconds = totalDuration / trials;
+    double avgDurationSeconds = avgDurationMicroseconds / 1'000'000.0; // Convert microseconds to seconds
+
+    cout << sortName << ": " << endl;
+    cout << fixed << setprecision(4);
+    cout << "Average Time Taken: " << avgDurationMicroseconds << " µs (" << avgDurationSeconds << " seconds)" << endl << endl;
+}
+
+// Overloaded measureSortTime function for merge sort (three-parameter version)
+void measureSortTime(void (*sortFunc)(int[], int, int), int arr[], int l, int r, const string& sortName)
+{
+    int trials = 25;
+    double totalDuration = 0.0;
+
+    for (int t = 0; t < trials; t++) {
+        auto start = high_resolution_clock::now(); // Start the timer
+        sortFunc(arr, l, r);                       // Sort the subarray arr[l...r]
+        auto end = high_resolution_clock::now();   // End the timer
+
+        auto duration = duration_cast<microseconds>(end - start).count(); // Calculate duration in microseconds
+        totalDuration += duration;
+    }
+
+    double avgDurationMicroseconds = totalDuration / trials;
+    double avgDurationSeconds = avgDurationMicroseconds / 1'000'000.0; // Convert microseconds to seconds
+
+    cout << sortName << ": " << endl;
+    cout << fixed << setprecision(4);
+    cout << "Average Time Taken: " << avgDurationMicroseconds << " µs (" << avgDurationSeconds << " seconds)" << endl << endl;
+}
+
+
