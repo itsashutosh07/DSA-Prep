@@ -82,7 +82,7 @@ void insertionSort(int arr[], int n)
     // }
 }
 
-void merge(int arr[], int l, int m, int r) {
+void mergeOptimized(int arr[], int l, int m, int r) {
     int leftSize = m - l + 1;
     int rightSize = r - m;
     
@@ -126,17 +126,44 @@ void merge(int arr[], int l, int m, int r) {
         k++;
     }
 }
-
+void merge(int arr[], int l, int m, int r)
+{
+    int l1 = l, r1 = m;
+    int l2 = m+1, r2 = r;
+    vector<int> temp;
+    
+    while (l1 <= r1 && l2 <= r2) {
+        if (arr[l1] <= arr[l2]) {
+            temp.push_back(arr[l1]);
+            l1++;
+        }
+        else {
+            temp.push_back(arr[l2]);
+            l2++;
+        }
+    }
+    while (l1 <= r1) {
+        temp.push_back(arr[l1]);
+        l1++;
+    }
+    while (l2 <= r2) {
+        temp.push_back(arr[l2]);
+        l2++;
+    }
+    
+    for (int i = l; i <= r; i++) 
+        arr[i] = temp[i-l];
+}
 void mergeSort(int arr[], int l, int r) {
     if (l < r) {
-        int m = l + (r - l) / 2; // Avoids overflow for large l and r
+        int m = l + (r - l) / 2; // Avoids overflow for large l and r, but gave TLE in GfG OJ.
         mergeSort(arr, l, m);
         mergeSort(arr, m + 1, r);
         merge(arr, l, m, r);
     }
 }
 
-int quickSortPartition (int arr[], int low, int high)
+int quickSortRandomizedPartition (int arr[], int low, int high)
 {
      // Choose a random pivot index between low and high
     int pivotIndex = low + rand() % (high - low + 1);
@@ -161,6 +188,24 @@ int quickSortPartition (int arr[], int low, int high)
    swap(arr[low], arr[j]);
    return j;
 }
+int quickSortPartition (int arr[], int low, int high)
+{
+    int pivot = arr[low];
+    int i = low, j = high;
+    while (i < j) {
+        while(arr[i] <= pivot && i <= high - 1) {
+            i++;
+        }
+        while(arr[j] > pivot && j >= low + 1) {
+            j--;
+        }
+        
+        if (i < j)
+            swap(arr[i], arr[j]);
+    }
+    swap(arr[low], arr[j]);
+    return j;
+}
 void quickSort(int arr[], int low, int high)
 {
     if (low < high) {
@@ -175,23 +220,39 @@ int main() {
     srand(time(0));  // Initialize random seed
 
     const int n = 10000;  // Size of the array
+    const int m = 9;  // Size of the array
 
-    int arr1[n];
+    int a1[m] = {7, 5, 9, 0, 1, -4, 8, 3, 7};
+    selectionSort(a1, m);
+    printArray(a1, m);
+    int arr1[n]; 
     generate(arr1, arr1 + n, []() { return rand() % 10000; });
     measureSortTime(selectionSort, arr1, n, "Selection Sort");
 
+    int a2[m] = {7, 5, 9, 0, 1, -4, 8, 3, 7};
+    bubbleSort(a2, m);
+    printArray(a2, m);
     int arr2[n];
     generate(arr2, arr2 + n, []() { return rand() % 10000; });
     measureSortTime(bubbleSort, arr2, n, "Bubble Sort");
 
+    int a3[m] = {7, 5, 9, 0, 1, -4, 8, 3, 7};
+    insertionSort(a3, m);
+    printArray(a3, m);
     int arr3[n];
     generate(arr3, arr3 + n, []() { return rand() % 10000; });
     measureSortTime(insertionSort, arr3, n, "Insertion Sort");
 
+    int a4[m] = {7, 5, 9, 0, 1, -4, 8, 3, 7};
+    mergeSort(a4, 0, m-1);
+    printArray(a4, m);
     int arr4[n];
     generate(arr4, arr4 + n, []() { return rand() % 10000; });
     measureSortTime(mergeSort, arr4, 0, n - 1, "Merge Sort");
 
+    int a5[m] = {7, 5, 9, 0, 1, -4, 8, 3, 7};
+    quickSort(a5, 0, m-1);
+    printArray(a5, m);
     int arr5[n];
     generate(arr5, arr5 + n, []() { return rand() % 10000; });
     measureSortTime(quickSort, arr5, 0, n - 1, "Quick Sort");
