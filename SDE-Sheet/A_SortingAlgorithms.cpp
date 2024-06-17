@@ -31,12 +31,33 @@ void selectionSort(int arr[], int n)
 void bubbleSort(int arr[], int n)
 {
     // pushes maximums to the end of array by adjecent swappings
+
+    // Iterative
     for (int k = 0; k < n; k++) {
+        bool isSwapped = false;
         for (int i = 1; i < n-k; i++) {
-            if (arr[i-1] > arr[i])
+            if (arr[i-1] > arr[i]) {
                 swap(arr[i], arr[i-1]);
+                isSwapped = true;
+            }
         }
+        if (!isSwapped) break;
     }
+
+    // Recursive
+    // if (n == 1) return;
+        
+    // bool isSwapped = false;
+    // for (int i = 1; i < n; i++) {
+    //     if (arr[i-1] > arr[i]) {
+    //         swap(arr[i], arr[i-1]);
+    //         isSwapped = true;
+    //     }
+    // }
+    
+    // if (!isSwapped) return;
+    
+    // bubbleSort(arr, n-1);
 }
 
 void insertionSort(int arr[], int n)
@@ -49,6 +70,16 @@ void insertionSort(int arr[], int n)
             j--;
         }
     }
+    // Recursive Insertion Sort
+    // if (n <= 1) return;
+    
+    // insertionSort(arr, n-1);
+    
+    // int i = n-1;
+    // while(i > 0 && arr[i] < arr[i-1]) {
+    //     swap(arr[i], arr[i-1]);
+    //     i--;
+    // }
 }
 
 void merge(int arr[], int l, int m, int r) {
