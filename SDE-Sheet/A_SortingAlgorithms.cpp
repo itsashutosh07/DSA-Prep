@@ -217,10 +217,10 @@ void quickSort(int arr[], int low, int high)
 
 
 int main() {
-    srand(time(0));  // Initialize random seed
+    srand(time(0));         // Initialize random seed
 
-    const int n = 10000;  // Size of the 'arr'
-    const int m = 9;  // Size of the 'a'
+    const int n = 10000;    // Size of the 'arr'
+    const int m = 9;        // Size of the 'a'
 
     int a1[m] = {7, 5, 9, 0, 1, -4, 8, 3, 7};
     selectionSort(a1, m);
