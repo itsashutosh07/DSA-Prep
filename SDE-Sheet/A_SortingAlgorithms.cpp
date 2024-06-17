@@ -267,7 +267,7 @@ int main() {
 
 
 
-2. <:::::::::::: INSERTION SORT ::::::::::::> 
+3. <:::::::::::: INSERTION SORT ::::::::::::> 
     Pushes maximums to the end of array by adjecent swappings
 
     - TC: O(N^2), for the best, worst, and average cases.
@@ -281,29 +281,38 @@ int main() {
         - After each iteration we would have bubbled up the max element to last/sorted part of the array, so 
 
 - Ex:
-    step1:  [1    2 8 5 3 7 4 0]    |   []=>un-sorted part
-             i-1  i                 |   
+    step1:  [1]   2 8 5 3 7 4 0     |   []=>sorted part
+             i-1  i=k               |   
                                     |
-    step2:  [1 2    8 5 3 7 4 0]    |   increase i in each iteration of inner loop
-               i-1  i               | 
+    step2:  [1 2]   8 5 3 7 4 0     |   increase k in each iteration of outer loop
+               i-1  i=k             | 
                                     |
-    step2:  [1 2 8    5 3 7 4 0]    |   swap only if greater element is encountered at i-1 
-                 i-1  i             |   
+    step3:  [1 2 8]<->5 3 7 4 0     |   swap element at i only if greater element is encountered at i-1 
+                 i-1  i=k           |   
                                     |
-    step3:  [1 2 5<->8 3 7 4 0]     |
-                 i-1 i              |  
+    step4:  [1 2 5<-->8] 3 7 4 0    |   continue to swap till element at i-1 is greater than i
+                 i-1  i             |   and decrease i in inner loop
                                     |
-    step3:  [1 2 5 8   3 7 4 0]     |
-                   i-1 i            |  
+    step5:  [1 2   5 8] 3 7 4 0     |
+               i-1 i                |  
                                     |
-    step4:  [1 2 5 3<->8 7 4 0]     |
-                   i-1 i            |   
+    step5:  [1 2 5 8]<-->3 7 4 0    |
+                   i-1   i=k        |  
                                     |
-    stepX:  [1 2 5 3 7 4 0<->8]     |
-                         i-1 i      | 
+    step5:  [1 2 5 3<-->8] 7 4 0    |
+                   i-1  i           |  
                                     |
-    stepY:  [1 2 5 3 7 4 0] 8       |   8, the max in unsorted part has reached the sorted portion of array
+    step5:  [1 2 3<-->5 8] 7 4 0    |
+                 i-1  i             |  
                                     |
-    stepZ:  [1 2 5 3 4 0] 7 8       |   7, the max in unsorted part has reached the sorted portion of array
+    step5:  [1 2 3<-->5 8] 7 4 0    |
+                 i-1  i             |  
+                                    |____
+   ....... ....... ....... .......      |
+                                        |
+    step5:  [0 1 2 3 4 7 5    8]        |   at last we will have moved k till last of array, 
+                         i-1  i=k=(n-1) |   meaning our whole array is now sorted.
+                                        |
+
 
 */
