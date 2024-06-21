@@ -23,12 +23,48 @@ DESCRIPTION :
     You must do it in place.
 
 Example 1:
-    Input: matrix = [[1,1,1],[1,0,1],[1,1,1]]
-    Output: [[1,0,1],[0,0,0],[1,0,1]]
+    Input: matrix = 
+        [[1,1,1],
+         [1,0,1],<---
+         [1,1,1]]
+            ^
+            |
+            |
+    Output: 
+        [[1,0,1],
+         [0,0,0],<--
+         [1,0,1]]
 
 Example 2:
-    Input: matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
-    Output: [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+    Input: matrix = 
+        [[0,1,2,0],
+         [3,4,5,2],
+         [1,3,1,5]]
+    Output: 
+        [[0,0,0,0],
+         [0,4,5,0],
+         [0,3,1,0]]
+
+Constraints:
+    m == matrix.length
+    n == matrix[0].length
+    1 <= m, n <= 200
+    -231 <= matrix[i][j] <= 231 - 1
+ 
+
+Follow up:
+    - A straightforward solution using O(mn) space is probably a bad idea.
+    - A simple improvement uses O(m + n) space, but still not the best solution.
+    - Could you devise a constant space solution?
+
+Hint 1
+    If any cell of the matrix has a zero we can record its row and column number using additional memory. But if you don't want to use extra memory then you can manipulate the array instead. i.e. simulating exactly what the question says.
+Hint 2
+    Setting cell values to zero on the fly while iterating might lead to discrepancies. What if you use some other integer value as your marker? There is still a better approach for this problem with 0(1) space.
+Hint 3
+    We could have used 2 sets to keep a record of rows/columns which need to be set to zero. But for an O(1) space solution, you can use one of the rows and and one of the columns to keep track of this information.
+Hint 4
+    We can use the first cell of every row and column as a flag. This flag would determine whether a row or column has been set to zero.
 
 */ 
 
@@ -161,19 +197,29 @@ int main()
 SOLUTIONS:-
 
 1. O(1) Space & O(n^3) TC: Brute Force
-traverse each element of matrix and for each element, 
-    a. if element == 0, convert each corresponding element in that row & column from 1 -> -1 (exclude converting 0 -> -1).
-    b. reiterate entire matrix  and now convert those -1 -> 0.
+- 1st iteration:
+    - traverse each element of matrix and for each element, if element == 0, convert each corresponding element in that row & column from 1 -> -1 (exclude converting 0 -> -1).
+- 2nd iteration:
+    - reiterate entire matrix  and now convert those -1 -> 0.
 
 2. O(n+m) Space & O(n^2) TC: Optimized
-have a zeroRow and zeroCol arrays of size n & m. Populate zeroRow[i] and zeroCol[j] of these arrays if matrix[i][j] == 0.  Set elements of orignal matrix as zero according to the two arrays.
+- 1st iteration:
+    - Maintain a zeroRow and zeroCol arrays of size n & m respectivly. 
+    - Populate zeroRow[i] and zeroCol[j] of these arrays if matrix[i][j] == 0.  
+- 2nd iteration:
+    - Set elements of orignal matrix (matrix[i][j] = 0) as zero according to the two arrays ((zeroRow[i] || zeroCol[j]) -> 0).
 
 3. O(1) extra space & O(n^2) TC: OPTIMIZED
-Inplace store row/col to be set as zero by marking 0 in 0th row and 0th col.
-    Keep extra variable for the overlapping matrix[0][0] element as Col0 and mark it initaially as 1.
-    mark all inplace the zeros in 0th col and 0th row.
-    traverse and mark row0 as zeros if matrix[0][0] == 0
-    traverse and mark col0 as zeros if Col0 == 0.
+- 1st iteration:
+    - Inplace store row/col to be set as zero by marking 0 in 0th row and 0th col.
+        - Keep extra variable for the overlapping matrix[0][0] element as Col0 and mark it initaially as 1.
+    - mark all zeros in our inplace asumed 0th col and 0th row.
+        - if some element of 0th col is 0 then mark 'col0' as 0.
+- 2nd iteration:
+    - first traverse the portion of array starting from i=1 & j=1 till down and end, and mark all element as 0 according to our two inpace vectors 'col' & 'row'. 
+    - next traverse 1st-row and mark each element 0 iff matrix[0][0] is 0, since thats the elemt solely responsible for row-0.
+    - last traverse & mark each element of 1st-col according to col0's value.
+    
     {row0 needs to be traversed 1st since if matrix[0][0] is changed 1st by use of Col0 then matrix[0][0]'s changed value will affect row0}
 
 */

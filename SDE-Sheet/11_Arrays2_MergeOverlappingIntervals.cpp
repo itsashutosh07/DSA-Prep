@@ -118,10 +118,10 @@ int main()
 
     // Method Invocation & Result Visualization
     printFormattedMatrix(sol.merge1(intervals1));
-    printFormattedMatrix(sol.merge1(intervals2), "{", "}", "\n");
-    printFormattedMatrix(sol.merge1(intervals3), "(", ")", "");
-    printFormattedMatrix(sol.merge1(intervals4), "'", "'", "");
-    printFormattedMatrix(sol.merge1(intervals5), "|", "|", "");
+    printFormattedMatrix(sol.merge1(intervals2), "{", "}", "_", "\n");
+    printFormattedMatrix(sol.merge1(intervals3), "(", ")", " ", "");
+    printFormattedMatrix(sol.merge1(intervals4), "'", "'", ",", "");
+    printFormattedMatrix(sol.merge1(intervals5), "|", "|", ",", "");
 
     return 0;
 }

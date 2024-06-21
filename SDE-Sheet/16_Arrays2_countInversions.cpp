@@ -53,8 +53,8 @@ Expected Auxiliary Space: O(n).
 
 class Solution {
     public:
-    long long int merge(long long arr[], long long int low, long long int mid, long long int high) {
-        long long int inversion = 0;
+    long long int inversion = 0;
+    void merge(long long arr[], long long int low, long long int mid, long long int high) {
         vector<long long> temp;
         
         long long int l1 = low, r1 = mid;
@@ -82,23 +82,25 @@ class Solution {
         for (int i = 0; i <= (high-low); i++) {
             arr[low+i] = temp[i];
         }
-        return inversion;
     }
-    long long int mergeSort(long long arr[], long long int low, long long int high) {
-        long long int inversion = 0;
-        if (low >= high) 
-            return inversion;
+    void mergeSort(long long arr[], long long int low, long long int high) {
+        if (low >= high) return;
         
-        long long int mid = low + (high - low) / 2;
-    
-        inversion += mergeSort(arr, low, mid);
-        inversion += mergeSort(arr, mid+1, high);
-        inversion += merge(arr, low, mid, high);
-        return inversion;
+        long long int mid = (high + low) / 2;
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid+1, high);
+        merge(arr, low, mid, high);
     }
     long long int inversionCount(int N, long long arr[]) {
-        return (long long int) mergeSort(arr, 0, N-1);
+        // Your Code Here
+        mergeSort(arr, 0, N-1);
+
+        return inversion;
     }
+
+    // long long int inversionCount(int N, long long arr[]) {
+    //     return (long long int) mergeSort(arr, 0, N-1);
+    // }
 
 };
 
@@ -131,7 +133,7 @@ SOLUTIONS:-
     - implement whole merge sort code
     - in MERGE part of the code,  where we check if arr[l1] > arr[l2],
         - where l1 is the start index of 1t array to be merged and l2 is the start pointer of 2nd array in merging process
-    - simply increase the counter by the number of elements present currently to the right of [l2 till r2, both inclusive]
+    - simply increase the counter by the number of elements present currently to the right of [l1 till r1, both inclusive]
     - inversion += (r1 - l1 + 1);
     - return inversion count
 

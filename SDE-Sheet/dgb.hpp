@@ -92,8 +92,7 @@ void printMatrix(const vector< vector<T> >& mat, const string delim = " ", const
 }
 
 template<typename T>
-void printFormattedMatrix(const vector<vector<T>>& mat, const string& start = "[", const string& end = "]", 
-        const string& lineBreak = "") {
+void printFormattedMatrix(const vector<vector<T>>& mat, const string& start = "[", const string& end = "]", const string& sep = ",", const string& lineBreak = "") {
     cout << start << lineBreak;
     for (size_t i = 0; i < mat.size(); i++) 
     {
@@ -103,12 +102,12 @@ void printFormattedMatrix(const vector<vector<T>>& mat, const string& start = "[
         {
             cout << mat[i][j];
             if (j != mat[i].size() - 1) {
-                cout << ",";
+                cout << sep;
             }
         }
         cout << end;
         if (i != mat.size() - 1) {
-            cout << ",";
+            cout << sep;
         }
         cout << lineBreak;
     }
