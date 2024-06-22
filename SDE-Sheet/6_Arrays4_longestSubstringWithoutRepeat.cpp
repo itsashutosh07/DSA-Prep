@@ -56,27 +56,24 @@ class Solution {
         int currLen = 0, maxLen = 0;
         unordered_set<char> seen;
         for (int i = 0; i < n; i++) {
-            seen.insert(s[i]);
-            currLen = 1;
-            for (int j = i+1; j < n; j++) {
+            currLen = 0;
+            for (int j = i; j < n; j++) {
                 if (seen.find(s[j]) == seen.end()) {
                     seen.insert(s[j]);
                     currLen++;
-                    if (currLen > maxLen) {
-                        maxLen = currLen;
-                    }
+                    // if (currLen > maxLen) {
+                    //     maxLen = currLen;
+                    // }
                     continue;
                 }
                 else {
-                    if (currLen > maxLen) {
-                        maxLen = currLen;
-                    }
+                    // if (currLen > maxLen) {
+                    //     maxLen = currLen;
+                    // }
                     break;
                 }
             }
-            if (currLen > maxLen) {
-                maxLen = currLen;
-            }
+            if (currLen > maxLen) maxLen = currLen;
             seen.clear();
         }
         return maxLen;
@@ -146,12 +143,12 @@ int main()
 
 
     // Method Invocation & Result Visualization
-    cout << sol.lengthOfLongestSubstring2(s1) << endl;
-    cout << sol.lengthOfLongestSubstring2(s2) << endl;
-    cout << sol.lengthOfLongestSubstring2(s3) << endl;
-    cout << sol.lengthOfLongestSubstring2(s4) << endl;
-    cout << sol.lengthOfLongestSubstring2(s5) << endl;
-    cout << sol.lengthOfLongestSubstring2(s6) << endl;
+    cout << sol.lengthOfLongestSubstring3(s1) << endl;
+    cout << sol.lengthOfLongestSubstring3(s2) << endl;
+    cout << sol.lengthOfLongestSubstring3(s3) << endl;
+    cout << sol.lengthOfLongestSubstring3(s4) << endl;
+    cout << sol.lengthOfLongestSubstring3(s5) << endl;
+    cout << sol.lengthOfLongestSubstring3(s6) << endl;
 
     return 0;
 }

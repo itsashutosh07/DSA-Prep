@@ -46,9 +46,9 @@ class Solution {
     public:
     void sortColors(vector<int>& nums) {
         // Dutch National Flag Algorithm
-        
-        // nums[] =  0 0 0 0 0 0    1 1 1 1 1    X X X X X X 2 2 2 2 2
-        // indices = 0_________L-1__L_______M-1__M_________H_________N-1
+        //                                                [*]
+        // nums[] =  0 0 0 0 0 0    1 1 1 1 1    X X X X X X    2 2 2 2 2
+        // indices = 0_________L-1__L_______M-1__M_________H____H+1_____N-1
         
         // X X X X X X -> unsorted part of array
 
