@@ -1,6 +1,6 @@
 
 #include <bits/stdc++.h>
-#include "dgb.hpp"
+#include "../dgb.hpp"
 #include <chrono>
 
 using namespace std;

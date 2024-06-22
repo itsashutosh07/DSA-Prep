@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "dgb.hpp"
+#include "../dgb.hpp"
 
 using namespace std;
 
