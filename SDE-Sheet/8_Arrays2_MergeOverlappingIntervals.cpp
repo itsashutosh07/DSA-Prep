@@ -138,7 +138,7 @@ SOLUTIONS:-
         - If the start is greater than the end, we can conclude the current interval cannot be a part of the selected interval.
 
 2. O(n) Space & O(n^2) TC | Optimized | self
-    - since there is one interval present in intervals array fiven by constrains we initialize :
+    - since there is one interval present in intervals array given by constrains we initialize :
         - start = intervals[0][0] -and- end = intervals[0][1] 
     - now start a loop i : 1->n-1 inclusive, 
         - for each encountered interval we see whats the begganing and last of this interval :

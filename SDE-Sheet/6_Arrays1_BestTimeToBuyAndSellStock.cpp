@@ -116,6 +116,7 @@ SOLUTIONS:-
     - and at the end of each itearation, curr_profit challenges max_profit that if curr_profit exceeds max_profit then update max_profit
 
 2.  O(1) extra space & O(n) TC | OPTIMIZED
+    - maxProfit if stock is sold at the given day "i" is achieved if it was bought at min_so_far price.
     - Iterate over the prices array i: 0->n-1
     - maintain a min_so_far variable that stores the minimum price seen till now
     - so, curr_profit would be (prices[i] - min_so_far)

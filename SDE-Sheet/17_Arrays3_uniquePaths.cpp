@@ -23,7 +23,7 @@ struct TreeNode;
 
 /*
 DESCRIPTION :
-    There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
+    There is a robot on an (m x n) grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
 
     Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
 
@@ -52,15 +52,16 @@ Constraints:
 class Solution {
     public:
     int solve(int m, int n, int i, int j) {
-        if ((i >= m && j < n) || (i < m && j >= n)) return 0;
-        if (i == m-1 && j == n-1) return 1;
-        int l = solve(m, n, i+1, j);
-        int r = solve(m, n, i, j+1);
-        return l+r;
+        if (i == m-1 && j == n-1) return 1; // reached end of the grid
+        if ((i >= m) || (j >= n)) return 0; // index out of bounds
+        int moveDown = solve(m, n, i+1, j);
+        int moveRight = solve(m, n, i, j+1);
+        return moveDown + moveRight;
     }
     int uniquePaths1(int m, int n) {
         return solve(m, n, 0, 0);
     }
+
     int uniquePaths2(int m, int n) {
         vector<vector<int>> dp (m, vector<int> (n, 0));
         for (int i = 0; i < m; i++) 
@@ -73,8 +74,24 @@ class Solution {
             }
         }
         return dp[0][0];
-        // return solve(m, n, 0, 0);
     }
+
+    int uniquePaths3(int m, int n) {
+        // Permutation n Combination
+        // for m = 2 & n = 3
+        // D R R        R = Right & D = Down
+        // R D R
+        // R R D
+        // total R = (col-1) & total D = (row-1) 
+        // ==>> N in NcR is = totalR + totalD = row + col - 2
+        // Total Combinations = _ _ _ = NcR = 3c1 = 3c2
+        long long res = 1, N = m+n-2, R = min(m-1, n-1);
+        for (int i = 0; i < R; i++) {
+            res = res * (N - i) / (i+1);
+        }
+        return res;
+    }
+
 
 };
 
@@ -102,6 +119,13 @@ int main()
     double avgDurationSeconds2 = duration2 /1'000'000.0; // Convert microseconds to seconds
     cout << "Average Time Taken: " << duration2 << " µs (" << avgDurationSeconds2 << " seconds)" << endl << endl;
 
+    auto start3 = high_resolution_clock::now(); // Start the timer
+    cout << sol.uniquePaths3(m, n) << endl;
+    auto end3 = high_resolution_clock::now();   // End the timer
+    auto duration3 = duration_cast<microseconds>(end3 - start3).count(); // Calculate duration in microseconds
+    double avgDurationSeconds3 = duration3 /1'000'000.0; // Convert microseconds to seconds
+    cout << "Average Time Taken: " << duration3 << " µs (" << avgDurationSeconds3 << " seconds)" << endl << endl;
+
 
     return 0;
 }
@@ -109,14 +133,36 @@ int main()
 /*
 SOLUTIONS:-
 
-1. O(1) Space & O(n^3) TC | Brute Force
-traverse each element of matrix and for each element, 
+1. TC: Exponential | SC: Exponential | Brute Force
+    - Recursion
+    - take i & j variables to iterate over the matrix
+    - Base cases:
+        - if index out of bounds then return 0 as no valid path possible
+        - if i & j reach the end point index then return 1, denoting 1 valid path.
+    - total no of ways from any given point in matrix would be summation of
+        -  the no. of ways to move right  + no. of ways to move down.
 
-2. O(n+m) Space & O(n^2) TC | Optimized
+2. TC: O(m*n) | SC: O(m*n) | Better
+    - Dynamic Programming / Tabulation 
+    - make matrix of the same size as the given matrix i.e. [row X col]
+    - each element of matrix denotes the no of ways to reach that point in matrix
+    - Base case:
+        - if last row/col is encountered there would be only 1 way to reach the destination, i.e. by travelling along the boundary
+    - iterate from destination i,j: (m-2,n-2) -> (0,0)
+    - sum up the element at a row down  + the element at a col right
+    - return element at 0,0
 
-
-3.  O(1) extra space & 2O(n^2) TC | OPTIMIZED
-
+3.  TC: O(n-1) or  O(m-1) | SC: O(1) | OPTIMIZED
+    - Combinatorics Solution
+    - Let no. of rows be m, no. of cols be n
+    - Observe examples of possible paths that could be taken to reach destination, we notice a similarity. 
+    - Each time we are taking an exactly ((rows-1)+(cols-1))=>(rows+cols-2) number of steps to reach the end.
+    - From start to reach the end we need a certain number of rightward directions and downward directions. 
+    - Thus we need cols-1 no. of rightward direction and rows-1 no. of downward direction to reach the endpoint.
+    - In total, (rows+cols-2) number of total step are required to reach the end.
+    - Hence the total no of ways to reach desination would be the ways to choose m rows out of m+n-2 total steps
+    - or choose n cols out of m+n-2 total steps
+    - Formally, (rows+cols-2)C(cols-1) or (rows+cols-2)C(rows-1)} to get the total # of paths.
 
 */
 
