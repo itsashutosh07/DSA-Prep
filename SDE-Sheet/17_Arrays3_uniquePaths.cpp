@@ -134,7 +134,7 @@ int main()
 SOLUTIONS:-
 
 1. TC: Exponential | SC: Exponential | Brute Force
-    - Recursion
+    # Recursion
     - take i & j variables to iterate over the matrix
     - Base cases:
         - if index out of bounds then return 0 as no valid path possible
@@ -143,26 +143,32 @@ SOLUTIONS:-
         -  the no. of ways to move right  + no. of ways to move down.
 
 2. TC: O(m*n) | SC: O(m*n) | Better
-    - Dynamic Programming / Tabulation 
+    # Dynamic Programming / Tabulation 
     - make matrix of the same size as the given matrix i.e. [row X col]
-    - each element of matrix denotes the no of ways to reach that point in matrix
+    - each element of the 'dp' matrix denotes the no of ways to reach that coordinate in matrix.
     - Base case:
-        - if last row/col is encountered there would be only 1 way to reach the destination, i.e. by travelling along the boundary
-    - iterate from destination i,j: (m-2,n-2) -> (0,0)
-    - sum up the element at a row down  + the element at a col right
-    - return element at 0,0
+        - if last-row(m-1) or last-col(n-1) is encountered there would be only 1 way to reach the destination
+            - i.e. by travelling along the last-row/last-col's boundary.
+    - iterate backwards from destination to 0,0 => i,j: (m-2,n-2) -> (0,0)
+    - In each element sum up the following 2 values:
+        - element present directly below the curr element, denoting the no. of ways to travel downwards from curr corrdinate.
+        - & similarly the element present directly at the col to right of current coordinate.
+    - return value at element at 0,0
 
 3.  TC: O(n-1) or  O(m-1) | SC: O(1) | OPTIMIZED
-    - Combinatorics Solution
+    # Combinatorix Solution
     - Let no. of rows be m, no. of cols be n
-    - Observe examples of possible paths that could be taken to reach destination, we notice a similarity. 
-    - Each time we are taking an exactly ((rows-1)+(cols-1))=>(rows+cols-2) number of steps to reach the end.
-    - From start to reach the end we need a certain number of rightward directions and downward directions. 
-    - Thus we need cols-1 no. of rightward direction and rows-1 no. of downward direction to reach the endpoint.
-    - In total, (rows+cols-2) number of total step are required to reach the end.
-    - Hence the total no of ways to reach desination would be the ways to choose m rows out of m+n-2 total steps
-    - or choose n cols out of m+n-2 total steps
+    - Write down all possible paths that could be taken to reach destination for small exampleas and we nowill notice some similarities. 
+    1. Each time we are taking an exactly ((rows-1)+(cols-1))=>(rows+cols-2) number of steps to reach the end.
+        - From start to reach the end we need a certain number of rightward directions and downward directions. 
+        - Thus we need to travel (cols-1) times rightward 
+        - & (rows-1) no. of in times downward direction to reach the endpoint.
+        - In total, (rows+cols-2) number of total step are required to reach the end.
+    2. Hence the total no of ways to reach desination would be
+        - the ways to choose m rows out of m+n-2 total steps
+        - or choose n cols out of m+n-2 total steps
     - Formally, (rows+cols-2)C(cols-1) or (rows+cols-2)C(rows-1)} to get the total # of paths.
+    - mathematically, nCr = (n!)/(r! * (n-r)!) => or simply, nCr = n * n-1 * n-2...(r-1) / 1*2*3...(r)
 
 */
 
