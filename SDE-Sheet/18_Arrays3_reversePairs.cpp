@@ -65,9 +65,8 @@ class Solution {
     }
 
     int countInverse(vector<int>& arr, int low, int mid, int high) {
-        int l1 = low, r1 = mid;
-        int l2 = mid+1, r2 = high;
-        int i = l1, j = l2, ans = 0;
+        int i = low, j = mid+1, ans = 0;
+        int r1 = mid, r2 = high;
         while (i <= r1 && j <= r2) {
             if ((long long)(arr[i]) > (long long)arr[j] * 2) {
                 ans += (r1 - i + 1);
@@ -117,7 +116,6 @@ class Solution {
     int reversePairs2(vector<int>& nums) {
         int ans = 0;
         ans = mergeSort(nums, 0, nums.size()-1);
-        // for (long long x : nums) cout << x << " ";
         return ans;
     }
 
@@ -147,13 +145,36 @@ int main()
 /*
 SOLUTIONS:-
 
-1. TC: O(n*m) | SC: O(1) | Brute Force
-    - Linear search
+1. TC: O(N^2) | SC: O(1) | Brute Force
+    # Nested search
+    - Use nested loops to generate all possible pairs
+    - First, we will run a loop(say i) from 0 to N-1 to select the a[i]. 
+    - Since we know index i must be smaller than index j, run another loop i.e. j from i+1 to N-1 to select arr[j].
+    - If they satisfy the condition (a[i] > 2*a[j]), we will increase the ans by 1.
+    - return ans
 
-2. TC: O(m+n) | SC: O(1) | Better
+2.  TC: O(logN * (N+N))) or O(2N*logN) | SC: O(N) | OPTIMIZED
+    # Merge sort variation
+    - This question is similar to count inverse where we were only required to tell if arr[i] > arr[j]
+        - but there's a catch, the merge function intrensically worked by comapring if arr[i] > arr[j]
+        - however we need to check if a[i] > 2*a[j]
+        - Thus, it is not necessary if a[l1] is not greater than 2*arr[l2], elements right to arr[l2] would also not be greater. Our previous logic worked on that principle only.
+    - Modified logic is to countPairs after 2 halves are sorted, but before they are merged!
+    - For every element in the sorted left half, how many elements in the right half(also sorted) can make a pair.
+    
+    - implement whole merge sort code
+    - after MERGE part of the code, call another method to count reverse pairs
+    - initialize "i" as the start index of left sorted half and "j" as the start index of right sorted half 
+    - if our condition of arr[i] > 2*arr[j]
+        - increase the counter by (r1 - i + 1)
+        => this is done since every element to right of i would also satisfy the condition
+    - else increment "i" and check for next element at "i".
+    => return count
 
-
-3.  TC: O(log(m*n)) | SC: O(1) | OPTIMIZED
+    - Note: either use globle counter variable *[NOT RECCOMENDED]*
+    OR 
+    - Make the return types of merge sort to be integer 
+        - and then return the counter by adding after each merge, merge sort & countInverse cycle.
 
 
 */

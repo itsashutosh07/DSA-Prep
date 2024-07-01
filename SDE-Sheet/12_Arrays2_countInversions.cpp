@@ -92,16 +92,11 @@ class Solution {
         merge(arr, low, mid, high);
     }
     long long int inversionCount(int N, long long arr[]) {
-        // Your Code Here
+
         mergeSort(arr, 0, N-1);
 
         return inversion;
     }
-
-    // long long int inversionCount(int N, long long arr[]) {
-    //     return (long long int) mergeSort(arr, 0, N-1);
-    // }
-
 };
 
 
@@ -132,12 +127,14 @@ SOLUTIONS:-
 2. O(n) Space & O(NlogN) TC | OPTIMIZED
     - implement whole merge sort code
     - in MERGE part of the code,  where we check if arr[l1] > arr[l2],
-        - where l1 is the start index of 1t array to be merged and l2 is the start pointer of 2nd array in merging process
-    - simply increase the counter by the number of elements present currently to the right of [l1 till r1, both inclusive]
+        - where l1 is the start index of 1st array to be merged and l2 is the start pointer of 2nd array in merging process
+    - in case when (arr[l1] > arr[l2]) simply increase the counter by the number of elements present currently to the right of: [l1 till r1, both inclusive]
+        - this is done since if element at l1 is greater than element at l2 
+        => every element to the right of l1 in 1st array would also be greater than the current element at l2.
     - inversion += (r1 - l1 + 1);
     - return inversion count
 
-    - Note: either use globle counter variable 
+    - Note: either use globle counter variable *[NOT RECCOMENDED]*
     or 
     - make the return types of merge sort to be integer 
         - and then return the counter by adding after each merge & merge sort cycle.
