@@ -62,7 +62,7 @@ class Solution {
             else {
                 sums[prefixSum] = i;
             }
-
+            cout << prefixSum << endl;
         }
         return ans;
     }
@@ -96,17 +96,20 @@ int main()
     vector<int> arr2 = {2,10,4};
     vector<int> arr3 = {1, 0, -4, 3, 1, 0};
     vector<int> arr4 = {1, -1, 1, -1};
+    vector<int> arr5 = {5,6,-1,5,-4,-2,-2,5,-1,0,1,1};
 
     // Method Invocation & Result Visualization
     cout << sol.maxLen1(arr1, 8) << endl;
     cout << sol.maxLen1(arr2, 3) << endl;
     cout << sol.maxLen1(arr3, 6) << endl;
     cout << sol.maxLen1(arr4, 4) << endl;
+    cout << sol.maxLen1(arr5, 12) << endl;
 
     cout << sol.maxLen2(arr1, 8) << endl;
     cout << sol.maxLen2(arr2, 3) << endl;
     cout << sol.maxLen2(arr3, 6) << endl;
     cout << sol.maxLen2(arr4, 4) << endl;
+    cout << sol.maxLen2(arr5, 12) << endl;
 
 
     return 0;
@@ -123,14 +126,33 @@ SOLUTIONS:-
     - if current subArray sum reaches 0 then challenge max_len 
     - return max_len 
 
-2. TC: O(n) | SC: O(n) | OPTIMIZED-edgeCase1
-    # maintain hash map with of [prefix_sum : index] -> return max len such that curr prefixSum is previously seen
-    - declare a
 
+idx    ->   0*   1   2    3   4   5*  6   7  
+arr[]   =  [15, -2,  2,  -8,  1,  7,  4,  8]
+prefixSum = 15  13  15    7   8   15  19  27
+res=5-0=[5]     <------max_lex-----> 
 
+2. TC: O(n) | SC: O(n) | OPTIMIZED-edgeCase1*
+    # hash map [prefixSum : idx] initialized with [sum:0, idx:-1] 
+    - declare a unordered_map 'prefixSums' for [prefixSum : index]
+    - *initialize 'currSum' as 0 and initially store prefixSum of '0' as '-1' since we initially start with sum 0 
+    - iterate over the array using a for loop 
+        - if sum value is NOT found in map then add (current sum value, index)
+            - do not update value of index if current sum value is found in map, since we want largest subArray
+        - else if current sum value is found in map calculate currLen as (curr_idx - prev_idx) //Not +1
+            - not +1 since the 1st occurance of the prefix sum is at an index before our desired subArray
+        - challenge and update max_len with curr_len at the end of each iteration if necessary
+    - return max_len
 
-2.  TC: O(n) | SC: O(n) | OPTIMIZED-edgeCase2
-
-
+2.  TC: O(n) | SC: O(n) | OPTIMIZED-edgeCase2*
+    # maintain hash_map [prefixSum : idx] return i+1 if prefixSum@i itself is 0
+    - declare a unordered_map 'prefixSums' for [prefixSum : index]
+    - iterate over the arr using for loop & calculate prefixSum by adding current element to sum
+    - if prefixSum at index i is itself 0 then our ans max_len should directly be updated as i+1
+    - else if value of prefixSum at idx i was encountered previously 
+        - curr_len will become curr_idx - index where curr_sum was previously encountered
+        - challenge and update max_len with curr_len if necessary
+    - else current value of prefixSum is seen first time -> add [prefixSum, idx] to hash map
+    - return max_len
 */
 
