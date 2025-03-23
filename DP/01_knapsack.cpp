@@ -17,7 +17,7 @@ struct TreeNode;
 █▄▄▄██▄▄▄██▄▄▄▄█▄▄█▄▄█▄▄▄▄█▄██▄█▄▄▄▄██▄▄▄██▄▄▄▄█▄▄▄▄█▄██▄██▄▄███▄███
 */
 
-// #0-1 Knapsack [Recursive]
+// #0-1 Knapsack
 
 /*
 DESCRIPTION :
@@ -152,9 +152,18 @@ SOLUTIONS:-
     Time Complexity: O(2^N), Where N is size of the array. As there are 2 choices for each index.
     Space Complexity:O(N), As we are using a recursion stack space of N.
 
-# TC: O(n*m) | SC: O(1) | Memoization
-    Time Complexity: O(2^N), Where N is size of the array. As there are 2 choices for each index.
-    Space Complexity:O(N), As we are using a recursion stack space of N.
+# TC: O(n*W) | SC: O(n*W) | Memoization
+    Time Complexity: O(n*W), As for every weight element we traverse through all weight capacities.
+    Space Complexity:O(n*W), The use of 2-D array of size ‘N*W’.
+
+# TC: O(n*W) | SC: O(n*W) | Bottom-up
+    Time Complexity: O(n*W), As for every weight element we traverse through all weight capacities.
+    Space Complexity:O(n*W), The use of 2-D array of size ‘N*W’.
+
+# TC: O(n*W) | SC: O(n*W) | Space-Optimized
+    Time Complexity: O(n*W), As for every weight element we traverse through all weight capacities.
+    Space Complexity:O(W), The use of two-1D arrays of size ‘W’ OR simply 2-D array of size 2*W.
+
 
 */
 
