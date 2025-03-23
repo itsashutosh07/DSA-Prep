@@ -50,20 +50,20 @@ class Solution {
     public:
     int knapsackRecursive(vector<int>& wt, vector<int>& val, int W, int n) {
 
-        // Base Condition
-        // Think of smallest possible values of the variables we can pass
+        // Base Condition : Think of smallest possible values of the variables we can pass
         // Mininum array's size 'n' can be 0 || min capacity of the bag 'W' can be 0, not negative
         if (n == 0 || W == 0)
             return 0;
 
-        // Choice Diagram
-        // Write in terms of choices we have to take/not-take the item
-        if (wt[n-1] <= W) {// if weight of current item is less than the total capacity of the bag 'W'
+        // Choice Diagram : Write in terms of choices we have to take/not-take the item
+        // if weight of current item is less than the total capacity of the bag 'W'
+        if (wt[n-1] <= W) {
             // Consider the profit which is max of either taking the current item / not taking the item.
             return max(val[n-1] + knapsackRecursive(wt, val, W - wt[n-1], n-1), // Take current item thus add its value to answer
                 knapsackRecursive(wt, val, W, n-1)); // Do not take current item, skip it.
         }
-        else if (wt[n-1] > W) // if weight of current item is greater than total capacity of the bag 'W'
+        // if weight of current item is greater than total capacity of the bag 'W'
+        else if (wt[n-1] > W) 
             return knapsackRecursive(wt, val, W, n-1);  // no choice here, skip current item as its heavier than bag's capacity 'W'
 
         return -1;
