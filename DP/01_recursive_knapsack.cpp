@@ -89,14 +89,9 @@ int main()
 /*
 SOLUTIONS:-
 
-1. TC: O(n*m) | SC: O(1) | Brute Force
-    # Linear search
-
-2. TC: O(m+n) | SC: O(1) | Better
-
-
-3.  TC: O(log(m*n)) | SC: O(1) | OPTIMIZED
-
+# TC: O(n*m) | SC: O(1) | Recursion
+    Time Complexity: O(2^N), Where N is size of the array. As there are 2 choices for each index.
+    Space Complexity:O(N), As we are using a recursion stack space of N.
 
 */
 
