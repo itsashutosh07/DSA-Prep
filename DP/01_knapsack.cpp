@@ -86,6 +86,25 @@ class Solution {
         return t[n][W];
     }
 
+    int knapsackBottomUp(vector<int>& wt, vector<int>& val, int W, int n, vector<vector<int>>& t) {
+
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= W; j++) {
+                // Base condition -> Initialization
+                if (i == 0 || j == 0)
+                    t[i][j] = 0;
+
+                // Choice Diagram -> Iterative version
+                else if (wt[i-1] <= j) 
+                    t[i][j] = max(val[i-1] + t[i-1][j-wt[i-1]], t[i-1][j]);
+                else if (wt[i-1] > j)
+                    t[i][j] = t[i-1][j];
+            }
+        }
+
+        return t[n][W];
+    }
+
 };
 
 
@@ -100,7 +119,7 @@ int main()
     int W = 650, n = wt.size();
 
     // Method Invocation 
-    cout << "Ans : " << sol.knapsackMemoized(wt, val, W, n, t) << endl;
+    cout << "Ans : " << sol.knapsackBottomUp(wt, val, W, n, t) << endl;
 
     // Time Measurement
     int trials = 5;
@@ -110,7 +129,7 @@ int main()
         vector<vector<int>> t (1001, vector<int> (1001, -1));
 
         auto start = high_resolution_clock::now(); // Start the timer
-        sol.knapsackMemoized(wt, val, W, n, t);
+        sol.knapsackBottomUp(wt, val, W, n, t);
         auto end = high_resolution_clock::now();   // End the timer
 
         auto duration = duration_cast<microseconds>(end - start).count(); // Calculate duration in microseconds
