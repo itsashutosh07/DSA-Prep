@@ -72,6 +72,34 @@ class Solution {
         return t[n][sum];
     }
 
+    bool subsetSumTabulation(vector<int>& nums, int sum, int n, vector<vector<int>>& t) {
+        // Base Condition -> Initialization
+        // Start from 0th row and column 
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= sum; j++) {
+                if (j == 0)
+                    t[i][j] = true;
+                else if (i == 0)
+                    t[i][j] = false;
+            }
+        }
+
+        // Choice Diagram
+        // Start from 1th row and column since 0th row has already been considered
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= sum; j++) {
+                if (nums[i-1] <= j) {
+                    t[i][j] = t[i-1][j - nums[i-1]] || t[i-1][j];
+                }
+                else {
+                    t[i][j] = t[i-1][j];
+                }
+            }
+        }
+
+        return t[n][sum];
+    }
+
 };
 
 
@@ -84,7 +112,7 @@ int main()
     int sum = 14;
     vector<vector<int>> t (1001, vector<int> (1001, -1));
     // Method Invocation & Result Visualization
-    if (sol.subsetSumMemoization(arr, sum, arr.size(), t))
+    if (sol.subsetSumTabulation(arr, sum, arr.size(), t))
         cout << "True" << endl;
     else
         cout << "False" << endl;
