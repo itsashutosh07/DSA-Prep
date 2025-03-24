@@ -77,22 +77,22 @@ class Solution {
         // Start from 0th row and column 
         for (int i = 0; i <= n; i++) {
             for (int j = 0; j <= sum; j++) {
-                if (j == 0)
-                    t[i][j] = true;
-                else if (i == 0)
+                if (i == 0) // if no item is there, we cannot achieve a non-zero sum
                     t[i][j] = false;
+                if (j == 0) // sum = 0 can be achieved with any number of items, empty sub-set
+                    t[i][j] = true; // sum = 0 with n = 0 items is also overrided to true here
             }
         }
 
         // Choice Diagram
-        // Start from 1th row and column since 0th row has already been considered
+        // Start from 1st row and column since 0th row has already been considered during initialisation
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= sum; j++) {
                 if (nums[i-1] <= j) {
-                    t[i][j] = t[i-1][j - nums[i-1]] || t[i-1][j];
+                    t[i][j] = (t[i-1][j - nums[i-1]]) || (t[i-1][j]); // take || not-take
                 }
-                else {
-                    t[i][j] = t[i-1][j];
+                else if (nums[i-1] > j) {
+                    t[i][j] = t[i-1][j]; // not take
                 }
             }
         }
