@@ -68,9 +68,11 @@ class Solution {
 
         // Choice Diagram
         if (nums[n-1] <= sum) 
-            return memoizedHelper(nums, sum - nums[n-1], n-1, t) || memoizedHelper(nums, sum, n-1, t);
+            t[n][sum] = memoizedHelper(nums, sum - nums[n-1], n-1, t) || memoizedHelper(nums, sum, n-1, t);
         else
-            return memoizedHelper(nums, sum, n-1, t);
+            t[n][sum] = memoizedHelper(nums, sum, n-1, t);
+
+        return t[n][sum];
     }
 
     bool tabulationHelper(vector<int>& nums, int sum, int n, vector<vector<int>>& t) {
@@ -113,10 +115,10 @@ class Solution {
         // return recursiveHelper(nums, sum/2, nums.size());
 
         // 2. Memoized Approach
-        // return memoizedHelper(nums, sum/2, nums.size(), t);
+        return memoizedHelper(nums, sum/2, nums.size(), t);
 
         // 3. Tabulation Approach
-        return tabulationHelper(nums, sum/2, nums.size(), t);
+        // return tabulationHelper(nums, sum/2, nums.size(), t);
     }
 
 };

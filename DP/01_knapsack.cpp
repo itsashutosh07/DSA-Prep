@@ -77,7 +77,8 @@ class Solution {
             return 0;
         
         //Return from memory if already calculated
-        if (t[n][W] != -1) return t[n][W];
+        if (t[n][W] != -1) 
+            return t[n][W];
 
         if (wt[n-1] <= W) 
             t[n][W] = max(val[n-1] + knapsackMemoized(wt, val, W - wt[n-1], n-1, t), knapsackMemoized(wt, val, W, n-1, t));
