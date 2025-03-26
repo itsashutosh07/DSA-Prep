@@ -109,14 +109,40 @@ int main()
     Solution sol;
 
     // Input Initialization
-    vector<int> arr = {3, 34, 4, 12, 5, 2};
-    int sum = 14;
-    vector<vector<int>> t (1001, vector<int> (1001, -1));
-    // Method Invocation & Result Visualization
-    if (sol.subsetSumTabulation(arr, sum, arr.size(), t))
-        cout << "True" << endl;
+    vector<int> arr = {1,2,4,7};
+    int sum = 7;
+    
+    if (sol.subsetSumRecursive(arr, sum, arr.size())) 
+        cout << "subsetSumRecursive : True" << endl << endl;
+    else 
+        cout << "subsetSumRecursive : False" << endl << endl;
+
+    
+    // Method Invocation : Memoization [Top-down]
+    vector<vector<int>> t (5, vector<int> (8, -1)); // [N+1 x Sum+1] size matrix
+    if (sol.subsetSumMemoization(arr, sum, arr.size(), t)) 
+        cout << "subsetSumMemoization : True" << endl;
+    else 
+        cout << "subsetSumMemoization : False" << endl;
+    
+    // Result Visualization : Memoization [Top-down]
+    printMatrix(t, "\t");
+    /* The memoized algorithm only explores states that contribute to the final answer. It prunes:
+        •	States that exceed the sum.
+        •	States that are unnecessary due to the nature of the recursion.
+        •	States that are equivalent due to overlapping subproblems.
+    */
+
+
+    // Method Invocation : Tabulation [Bottom-up]
+    vector<vector<int>> dp (5, vector<int> (8, -1)); // [N+1 x Sum+1] size matrix
+    if (sol.subsetSumTabulation(arr, sum, arr.size(), dp))
+        cout << "subsetSumTabulation : True" << endl;
     else
-        cout << "False" << endl;
+        cout << "subsetSumTabulation : False" << endl;
+
+    // Result Visualization : Tabulation [Bottom-up]
+    printMatrix(dp, "\t");
 
     return 0;
 }
