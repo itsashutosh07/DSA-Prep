@@ -149,7 +149,7 @@ class Solution {
         // }
 
         // Bottom-up Execution
-        subsetSumTabulation(nums, sum, n, t);
+        subsetSumTabulation(nums, sum/2, n, t); // We can call this only with sum/2 since below we are only going up till sum/2
         for (int i = 0; i <= sum/2; i++) {
             if (t[n][i])
                 minDifference = min(minDifference, (sum - (2*i)));
@@ -178,24 +178,24 @@ int main()
     return 0;
 }
 
+
 /*
 SOLUTIONS:-
 
-# TC: O(2^N + N*(sum/2)) | SC: O(N) | Recursion
-    Time Complexity:  O(2^N + (sum/2))  //  O(2^N) for subset generation using helper functions calls. Then, to get minimum difference, we iterate till sum/2 to get optimal solutions.
-    Space Complexity: O(N)   //  Recursion stack space is equal to the length of array.
+# TC: O(2^N + N*(totalSum/2)) | SC: O(N) | Recursion
+    Time Complexity:  O(2^N + N*(totalSum/2))  // O(2^N) for subset generation using recursive helper function calls, and O(N *totalSum) for going thorugh the loop.
+    Space Complexity: O(N)   //  Recursion stack space for the helper function is is equal to the length of array, 'n'.
 
-# TC: O(N*totalSum/2) | SC: O(N*totalSum/2) | Memoization [Top-down
-    Time Complexity:  O(N*totalSum/2) // 'subsetSumMemoized' has O(N * totalSum/2) time. The loop is bounded by the subset sum results, contributing additively.
-    Space Complexity: O(N*totalSum/2)  // Memoization table to store calculated subset sums.
+# TC: O(N*totalSum) | SC: O((N+1)*totalSum/2 +N) | Memoization [Top-down]
+    Time Complexity:  O(N*totalSum) // 'subsetSumMemoized' has O(N * totalSum/2) time + iteration space, so we explore (totalSum/2) with recursive stack O(N) space to account. Memoization cuts short some of redundant recursive calls, and can be assumed.
+    Space Complexity: O((N+1)*totalSum/2 + N)  // Memoization table t[n+1][sum+1] and space for helper recursive function calls.
 
-# TC: O(N*totalSum/2) | SC: O(totalSum/2) | Tabulation [Bottom-up]
-    Time Complexity:  O(N*totalSum/2) // Same logic and steps as Memoized. The for loop now depends on Tabulation approach.
-    Space Complexity: O(totalSum/2)   // Size of the array storing all the values less than the sum/2. This can act as subset 1 and other half can act as subset 2.
+# TC: O((N+1) * totalSum + N + (totalSum/2)) | SC: O((N+1) * totalSum) | Tabulation [Bottom-up]
+    Time Complexity:  O((N+1)*totalSum/2 + N + (totalSum/2))  // 'subsetSumTabulation' has O(N * totalSum/2) + finding total for sum  + for going to minDifference that requires loop sum/2 which we use.
+    Space Complexity: O((N+1) * totalSum)   // Size of the table for storing subset sum results.
 
-# TC: O(N*totalSum/2) | SC: O() | Space-Optimized
+# TC: O() | SC: O() | Space-Optimized
     Time Complexity:  O()
     Space Complexity: O()
 
 */
-
