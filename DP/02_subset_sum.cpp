@@ -109,8 +109,8 @@ int main()
     Solution sol;
 
     // Input Initialization
-    vector<int> arr = {1,2,4,7};
-    int sum = 7;
+    vector<int> arr = {1,2,3};
+    int sum = 6;
     
     if (sol.subsetSumRecursive(arr, sum, arr.size())) 
         cout << "subsetSumRecursive : True" << endl << endl;
@@ -119,7 +119,7 @@ int main()
 
     
     // Method Invocation : Memoization [Top-down]
-    vector<vector<int>> t (5, vector<int> (8, -1)); // [N+1 x Sum+1] size matrix
+    vector<vector<int>> t (4, vector<int> (7, -1)); // [N+1 x Sum+1] size matrix
     if (sol.subsetSumMemoization(arr, sum, arr.size(), t)) 
         cout << "subsetSumMemoization : True" << endl;
     else 
@@ -127,15 +127,15 @@ int main()
     
     // Result Visualization : Memoization [Top-down]
     printMatrix(t, "\t");
-    /* The memoized algorithm only explores states that contribute to the final answer. It prunes:
+    /* The memoized algorithm avoids recomputing overlapping subproblems by storing results, exploring only the solution space directly relevant to the final answer. It prunes:
         •	States that exceed the sum.
-        •	States that are unnecessary due to the nature of the recursion.
+        •	States that are unnecessary due to the nature of the recursion. (Due to short-circuiting nature or || OR used in the recursive/memoised approach)
         •	States that are equivalent due to overlapping subproblems.
     */
 
 
     // Method Invocation : Tabulation [Bottom-up]
-    vector<vector<int>> dp (5, vector<int> (8, -1)); // [N+1 x Sum+1] size matrix
+    vector<vector<int>> dp (4, vector<int> (7, -1)); // [N+1 x Sum+1] size matrix
     if (sol.subsetSumTabulation(arr, sum, arr.size(), dp))
         cout << "subsetSumTabulation : True" << endl;
     else
@@ -150,14 +150,21 @@ int main()
 /*
 SOLUTIONS:-
 
-1. TC: O(n*m) | SC: O(1) | Brute Force
-    # Linear search
+# TC: O(2^N) | SC: O(N) | Recursion
+    Time Complexity: O(2^N) // Each element can either be included or excluded from the subset, leading to 2 possibilities for every element.
+    Space Complexity: O(N)  // Maximum depth of the recursion call stack, corresponding to the size of the input array.
 
-2. TC: O(m+n) | SC: O(1) | Better
+# TC: O(n*sum) | SC: O(n*sum) | Memoization
+    Time Complexity: O(n*sum) // While table size is n*sum, the algorithm prunes unnecessary recursive branches.  Worst-case occurs when all states are explored.
+    Space Complexity: O(n*sum) //  Space required for the memoization table of size [n+1][sum+1].
 
+# TC: O(n*sum) | SC: O(n*sum) | Bottom-up
+    Time Complexity: O(n*sum) //  The algorithm iterates through each element of 'nums' and all possible sums up to 'sum', building a table of n*sum size.
+    Space Complexity: O(n*sum) // Stores results in a table of dimensions (n+1) x (sum+1).
 
-3.  TC: O(log(m*n)) | SC: O(1) | OPTIMIZED
-
+# TC: O(n*sum) | SC: O(sum) | Space-Optimized
+    Time Complexity: O(n*sum) // The approach remains the same.
+    Space Complexity: O(sum)  // Only stores current and previous row information, both are of size 'sum + 1'.
 
 */
 

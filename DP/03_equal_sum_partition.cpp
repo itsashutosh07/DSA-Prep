@@ -139,17 +139,25 @@ int main()
     return 0;
 }
 
+
 /*
 SOLUTIONS:-
 
-1. TC: O(n*m) | SC: O(1) | Brute Force
-    # Linear search
+# TC: O(2^N) | SC: O(N) | Recursion
+    Time Complexity:  O(2^N)  // Each element can either be included or excluded, leading to 2^N possibilities.
+    Space Complexity: O(N)   // Maximum recursion depth is proportional to the number of elements in the array.
 
-2. TC: O(m+n) | SC: O(1) | Better
+# TC: O(N*sum/2) | SC: O(N*sum/2) | Memoization [Top-down]
+    Time Complexity:  O(N*sum/2)  // The size of the array and (sum/2) acts as a limiting factor, pruning the recursion.
+    Space Complexity: O(N*sum/2)   // Stores intermediate results in a table of size N x (sum/2).
 
+# TC: O(N*sum/2) | SC: O(N*sum/2) | Tabulation [Bottom-up]
+    Time Complexity:  O(N*sum/2)  // Nested loops to fill table of N x (sum/2).
+    Space Complexity: O(N*sum/2)   // A table of size N x (sum/2) is used.
 
-3.  TC: O(log(m*n)) | SC: O(1) | OPTIMIZED
-
+# TC: O() | SC: O() | Space-Optimized
+    Time Complexity:  O()
+    Space Complexity: O()
 
 */
 

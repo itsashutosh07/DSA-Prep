@@ -96,11 +96,12 @@ int main()
     int n = arr.size();
     int target = 10;
     vector<vector<int>> t (1001, vector<int>(1001, -1));
+    vector<vector<int>> dp (1001, vector<int>(1001, -1));
 
     // Method Invocation & Result Visualization
     cout << sol.countOfSubsetSumRecursive(arr, target, n) << endl;
     cout << sol.countOfSubsetSumMemoised(arr, target, n, t) << endl;
-    cout << sol.countOfSubsetSumTabulation(arr, target, n, t) << endl;
+    cout << sol.countOfSubsetSumTabulation(arr, target, n, dp) << endl;
 
     return 0;
 }
@@ -108,14 +109,21 @@ int main()
 /*
 SOLUTIONS:-
 
-1. TC: O(n*m) | SC: O(1) | Brute Force
-    # Linear search
+# TC: O(2^N) | SC: O(N) | Recursion
+    Time Complexity:  O(2^N)  //  Each element has two choices: be included or excluded, leading to 2^N possibilities.
+    Space Complexity: O(N)    //  Maximum recursion depth is proportional to the number of elements.
 
-2. TC: O(m+n) | SC: O(1) | Better
+# TC: O(N*sum) | SC: O(N*sum) | Memoization [Top-down]
+    Time Complexity:  O(N*sum)  // Each subproblem (n, sum) is solved at most once.
+    Space Complexity: O(N*sum)   // Size of the memoization table t[N+1][sum+1].
 
+# TC: O(N*sum) | SC: O(N*sum) | Tabulation [Bottom-up]
+    Time Complexity:  O(N*sum)  // The nested loops iterate through each element and sum.
+    Space Complexity: O(N*sum)   //  Stores intermediate results in a table of size (N+1) x (sum+1).
 
-3.  TC: O(log(m*n)) | SC: O(1) | OPTIMIZED
-
+# TC: O(N*sum) | SC: O(sum) | Space-Optimized
+    Time Complexity:  O(N*sum)  //  The approach remains the same.
+    Space Complexity: O(sum)    //  Only two rows are stored at any time.
 
 */
 
