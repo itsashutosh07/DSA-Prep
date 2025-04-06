@@ -119,7 +119,7 @@ int main()
 
     
     // Method Invocation : Memoization [Top-down]
-    vector<vector<int>> t (4, vector<int> (7, -1)); // [N+1 x Sum+1] size matrix
+    vector<vector<int>> t (arr.size()+1, vector<int> (sum+1, -1)); // [N+1 x Sum+1] size matrix
     if (sol.subsetSumMemoization(arr, sum, arr.size(), t)) 
         cout << "subsetSumMemoization : True" << endl;
     else 
@@ -135,7 +135,7 @@ int main()
 
 
     // Method Invocation : Tabulation [Bottom-up]
-    vector<vector<int>> dp (4, vector<int> (7, -1)); // [N+1 x Sum+1] size matrix
+    vector<vector<int>> dp (arr.size()+1, vector<int> (sum+1, -1)); // [N+1 x Sum+1] size matrix
     if (sol.subsetSumTabulation(arr, sum, arr.size(), dp))
         cout << "subsetSumTabulation : True" << endl;
     else

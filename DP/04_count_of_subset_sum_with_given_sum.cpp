@@ -18,6 +18,7 @@ struct TreeNode;
 */
 
 // Count of subsets with sum equal to target
+// https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/0
 
 /*
 DESCRIPTION :
@@ -40,8 +41,18 @@ class Solution {
     public:
     int countOfSubsetSumRecursive(vector<int>& nums, int sum, int n) {
         // Base Condition
-        if (sum == 0) return 1;
-        else if (n == 0) return 0;
+        if (n == 0)     // Corrected and combined base case
+            return (sum == 0);  // Returns 1 if sum is also 0, 0 otherwise
+        /*
+        - Incorrect base case
+            if (sum == 0) return 1;
+            else if (n == 0) return 0;
+
+            - Above base case does not work for case: 
+                - arr = {0,0,0,0} , target = 0
+                - Actual Output : 1
+                - Expected output: 16 (2^4)
+        */
 
         // Choice Diagram
         if (nums[n-1] <= sum) 
@@ -51,8 +62,8 @@ class Solution {
     }
 
     int countOfSubsetSumMemoised(vector<int>& nums, int sum, int n, vector<vector<int>>& t) {
-        if (sum == 0) return 1;
-        else if (n == 0) return 0;
+        if (n == 0)
+            return (sum == 0);  // Returns 1 if sum is also 0, 0 otherwise
 
         if (t[n][sum] != -1) return t[n][sum];
 
@@ -73,7 +84,7 @@ class Solution {
         }
 
         for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= sum; j++) {
+            for (int j = 0; j <= sum; j++) {
                 if (nums[i-1] <= j) 
                     t[i][j] = t[i-1][j - nums[i-1]] + t[i-1][j];
                 else if (nums[i-1] > j) 
@@ -92,16 +103,25 @@ int main()
     Solution sol;
 
     // Input Initialization
-    vector<int> arr = {2,3,5,6,8,10};
-    int n = arr.size();
-    int target = 10;
-    vector<vector<int>> t (1001, vector<int>(1001, -1));
-    vector<vector<int>> dp (1001, vector<int>(1001, -1));
+    vector<int> arr1 = {5,2,3,10,6,8};
+    int n1 = arr1.size(), target1 = 10;
+    vector<vector<int>> t1 (n1+1, vector<int>(target1+1, -1));
+    vector<vector<int>> dp1 (n1+1, vector<int>(target1+1, -1));
 
+    vector<int> arr2 = {0,0,0,0,0};
+    int n2 = arr2.size(), target2 = 0;
+    vector<vector<int>> t2 (n2+1, vector<int>(target2+1, -1));
+    vector<vector<int>> dp2 (n2+1, vector<int>(target2+1, -1));
+    
+    
     // Method Invocation & Result Visualization
-    cout << sol.countOfSubsetSumRecursive(arr, target, n) << endl;
-    cout << sol.countOfSubsetSumMemoised(arr, target, n, t) << endl;
-    cout << sol.countOfSubsetSumTabulation(arr, target, n, dp) << endl;
+    cout << sol.countOfSubsetSumRecursive(arr1, target1, n1) << endl;
+    cout << sol.countOfSubsetSumMemoised(arr1, target1, n1, t1) << endl;
+    cout << sol.countOfSubsetSumTabulation(arr1, target1, n1, dp1) << endl << endl;
+
+    cout << sol.countOfSubsetSumRecursive(arr2, target2, n2) << endl;
+    cout << sol.countOfSubsetSumMemoised(arr2, target2, n2, t2) << endl;
+    cout << sol.countOfSubsetSumTabulation(arr2, target2, n2, dp2) << endl;
 
     return 0;
 }

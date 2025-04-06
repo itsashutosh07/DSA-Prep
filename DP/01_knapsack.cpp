@@ -95,12 +95,17 @@ class Solution {
                 // Base condition -> Initialization
                 if (i == 0 || j == 0)
                     t[i][j] = 0;
-
+            }
+        }
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= W; j++) {
                 // Choice Diagram -> Iterative version
-                else if (wt[i-1] <= j) 
+                if (wt[i-1] <= j) 
                     t[i][j] = max(val[i-1] + t[i-1][j-wt[i-1]], t[i-1][j]);
                 else if (wt[i-1] > j)
                     t[i][j] = t[i-1][j];
+
             }
         }
 
@@ -122,6 +127,7 @@ int main()
 
     // Method Invocation 
     cout << "Ans : " << sol.knapsackBottomUp(wt, val, W, n, t) << endl;
+    // printMatrix(t);
 
     // Time Measurement
     int trials = 5;

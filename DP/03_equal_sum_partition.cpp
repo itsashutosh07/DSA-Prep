@@ -101,15 +101,16 @@ class Solution {
 
     public:
     bool equalSumPartition(vector<int>& nums) {
-        int sum = 0;
-        vector<vector<int>> t (1001, vector<int>(1001, -1));
-
+        int sum = 0, n = nums.size();
+        
         for (int x : nums) sum += x;
-
+        
         if (sum % 2 != 0) {
             cout << "Sum is odd.\n";
             return false;
         }
+        
+        vector<vector<int>> t (n+1, vector<int>((sum/2)+1, -1));
 
         // 1. Recursive approach
         // return recursiveHelper(nums, sum/2, nums.size());
@@ -129,7 +130,7 @@ int main()
     Solution sol;
 
     // Input Initialization
-    vector<int> arr = {5,1,11,5};
+    vector<int> arr = {4,9,8,10,1,7,5,2};
     // Method Invocation & Result Visualization
     if (sol.equalSumPartition(arr))
         cout << "True" << endl;
