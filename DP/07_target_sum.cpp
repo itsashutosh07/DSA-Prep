@@ -173,17 +173,17 @@ int main()
 /*
 SOLUTIONS:-
 
-# TC: O() | SC: O() | Recursion
-    Time Complexity:  O()
-    Space Complexity: O()
+# TC: O(2^N) | SC: O(N) | Recursion
+    Time Complexity:  O(2^N) — each element can be either included or excluded, leading to an exponential number of combinations.
+    Space Complexity: O(N) — due to the recursion stack.
 
-# TC: O() | SC: O() | Memoization [Top-down]
-    Time Complexity:  O()
-    Space Complexity: O()
+# TC: O(N * s1) | SC: O(N * s1) | Memoization [Top-down]
+    Time Complexity:  O(N * s1) — where s1 = (total + target)/2.
+    Space Complexity: O(N * s1) — memoization table of size (N+1) x (s1+1).
 
-# TC: O() | SC: O() | Tabulation [Bottom-up]
-    Time Complexity:  O()
-    Space Complexity: O()
+# TC: O(N * s1) | SC: O(N * s1) | Tabulation [Bottom-up]
+    Time Complexity:  O(N * s1) — iterative filling of a DP table with dimensions (N+1) x (s1+1).
+    Space Complexity: O(N * s1) — DP table storage.
 
 # TC: O() | SC: O() | Space-Optimized
     Time Complexity:  O()

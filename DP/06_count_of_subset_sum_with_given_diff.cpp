@@ -160,17 +160,17 @@ int main()
 /*
 SOLUTIONS:-
 
-# TC: O() | SC: O() | Recursion
-    Time Complexity:  O()
-    Space Complexity: O()
+# TC: O(2^N) | SC: O(N) | Recursion
+    Time Complexity:  O(2^N) — each element has two choices (include or exclude).
+    Space Complexity: O(N) — due to the recursion stack depth.
 
-# TC: O() | SC: O() | Memoization [Top-down]
-    Time Complexity:  O()
-    Space Complexity: O()
+# TC: O(N * s) | SC: O(N * s) | Memoization [Top-down]
+    Time Complexity:  O(N * s) — where s = (total + diff)/2.
+    Space Complexity: O(N * s) — memoization table of size (N+1) x (s+1).
 
-# TC: O() | SC: O() | Tabulation [Bottom-up]
-    Time Complexity:  O()
-    Space Complexity: O()
+# TC: O(N * s) | SC: O(N * s) | Tabulation [Bottom-up]
+    Time Complexity:  O(N * s) — nested loops iterate through N elements and all sums up to s.
+    Space Complexity: O(N * s) — DP table of size (N+1) x (s+1).
 
 # TC: O() | SC: O() | Space-Optimized
     Time Complexity:  O()
