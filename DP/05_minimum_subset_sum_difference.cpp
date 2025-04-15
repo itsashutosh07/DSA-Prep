@@ -54,10 +54,8 @@ class Solution {
     }
 
     bool subsetSumMemoized(vector<int>& nums, int sum, int n, vector<vector<int>>& t) {
-        if (sum == 0) 
-            return true;
-        else if (n == 0)
-            return false;
+        if (sum == 0) return true;
+        else if (n == 0) return false;
 
         if (t[n][sum] != -1) 
             return t[n][sum];
@@ -130,8 +128,8 @@ class Solution {
         */
 
         int sum  = 0, minDifference = INT_MAX, n = nums.size();
-        vector<vector<int>> t (5, vector<int> (24, -1));
         for (int x : nums) sum += x;
+        vector<vector<int>> t (n+1, vector<int> ((sum/2)+1, -1));
 
         // Recursive Execution
         // for (int i = 0; i <= sum/2; i++) {
@@ -141,19 +139,19 @@ class Solution {
         // }
 
         // Memoized Execution
-        // for (int i = 0; i <= sum/2; i++) {
-        //     vector<vector<int>> t (5, vector<int> (24, -1));
-        //     if (subsetSumMemoized(nums, i, nums.size(), t)) {
-        //         minDifference = min(minDifference, (sum - (2*i)));
-        //     }
-        // }
+        for (int i = 0; i <= sum/2; i++) {
+            vector<vector<int>> t (n+1, vector<int> ((sum/2)+1, -1));
+            if (subsetSumMemoized(nums, i, nums.size(), t)) {
+                minDifference = min(minDifference, (sum - (2*i)));
+            }
+        }
 
         // Bottom-up Execution
-        subsetSumTabulation(nums, sum/2, n, t); // We can call this only with sum/2 since below we are only going up till sum/2
-        for (int i = 0; i <= sum/2; i++) {
-            if (t[n][i])
-                minDifference = min(minDifference, (sum - (2*i)));
-        }
+        // subsetSumTabulation(nums, sum/2, n, t); // We can call this only with sum/2 since below we are only going up till sum/2
+        // for (int i = 0; i <= sum/2; i++) {
+        //     if (t[n][i])
+        //         minDifference = min(minDifference, (sum - (2*i)));
+        // }
         // printMatrix(t);
         return minDifference;
     }
@@ -169,11 +167,13 @@ int main()
     vector<int> nums1 = {1,2,7};
     vector<int> nums2 = {1,6,11,5};
     vector<int> nums3 = {1,5,11,5};
+    vector<int> nums4 = {2,3,4,6,2,4,7,3,10,8,8,3,6,10,5,4,7,2,7,10,5,6,8,3,4,6,5,7,8,2,4,1,1,1,6,5,4,9,7,8,7,1,4,3,10,8,5,7,4,6,6,4,3,3,6,1,1,10,2,2,6,4,1,7,5,7,8,3,1,10,8,4,2,4,9,10,5,2,9,6,10,5,5,9,5,8,4,7,1,10,5,4,3,4,1,4};
 
     // Method Invocation & Result Visualization
     cout << sol.minSubsetSumDifference(nums1) << endl;
     cout << sol.minSubsetSumDifference(nums2) << endl;
     cout << sol.minSubsetSumDifference(nums3) << endl;
+    cout << sol.minSubsetSumDifference(nums4) << endl;
 
     return 0;
 }

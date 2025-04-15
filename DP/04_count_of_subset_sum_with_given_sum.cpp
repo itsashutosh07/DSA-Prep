@@ -79,7 +79,7 @@ class Solution {
         for (int i = 0; i <= n; i++) {
             for (int j = 0; j <= sum; j++) {
                 if (i == 0) t[i][j] = 0;
-                if (j == 0) t[i][j] = 1;
+                if (j == 0 and i == 0) t[i][j] = 1;
             }
         }
 
@@ -108,20 +108,22 @@ int main()
     vector<vector<int>> t1 (n1+1, vector<int>(target1+1, -1));
     vector<vector<int>> dp1 (n1+1, vector<int>(target1+1, -1));
 
-    vector<int> arr2 = {0,0,0,0,0};
-    int n2 = arr2.size(), target2 = 0;
+    vector<int> arr2 = {0,1,1,0,3,0,0};
+    int n2 = arr2.size(), target2 = 4;
     vector<vector<int>> t2 (n2+1, vector<int>(target2+1, -1));
     vector<vector<int>> dp2 (n2+1, vector<int>(target2+1, -1));
     
-    
+
     // Method Invocation & Result Visualization
     cout << sol.countOfSubsetSumRecursive(arr1, target1, n1) << endl;
     cout << sol.countOfSubsetSumMemoised(arr1, target1, n1, t1) << endl;
     cout << sol.countOfSubsetSumTabulation(arr1, target1, n1, dp1) << endl << endl;
+    printMatrix(dp1);
 
     cout << sol.countOfSubsetSumRecursive(arr2, target2, n2) << endl;
     cout << sol.countOfSubsetSumMemoised(arr2, target2, n2, t2) << endl;
-    cout << sol.countOfSubsetSumTabulation(arr2, target2, n2, dp2) << endl;
+    cout << sol.countOfSubsetSumTabulation(arr2, target2, n2, dp2) << endl << endl;
+    printMatrix(dp2, "\t");
 
     return 0;
 }
