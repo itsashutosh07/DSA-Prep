@@ -140,18 +140,18 @@ int main()
 /*
 SOLUTIONS:-
 
-# TC: O() | SC: O() | Recursion
-    Time Complexity:  O()
-    Space Complexity: O()
+# TC: O(2^n) | SC: O(n) | Recursion
+    Time Complexity:  O(2^n) — For each length, we can either cut or not cut, leading to exponential combinations.
+    Space Complexity: O(n) — Due to recursion stack depth (maximum n calls).
 
-# TC: O() | SC: O() | Memoization [Top-down]
-    Time Complexity:  O()
-    Space Complexity: O()
+# TC: O(n * l) | SC: O(n * l) | Memoization [Top-down]
+    Time Complexity:  O(n * l) — Each state (n, l) is computed once, where n = number of possible cuts, l = rod length.
+    Space Complexity: O(n * l) — For the memoization table, plus O(n) recursion stack.
 
-# TC: O() | SC: O() | Tabulation [Bottom-up]
-    Time Complexity:  O()
-    Space Complexity: O()
-
+# TC: O(n * l) | SC: O(n * l) | Tabulation [Bottom-up]
+    Time Complexity:  O(n * l) — Filling a DP table of size (n+1) x (l+1).
+    Space Complexity: O(n * l) — For the DP table.
+    
 # TC: O() | SC: O() | Space-Optimized
     Time Complexity:  O()
     Space Complexity: O()
