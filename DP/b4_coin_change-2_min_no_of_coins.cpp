@@ -21,6 +21,7 @@ using namespace std;
 DESCRIPTION :
     Your task is to determine the minimum number of coins needed to obtain the target sum. If it is not possible to form the sum using the given coins, return -1.
 
+    
 Example-1:
     Input: coins[] = [25, 10, 5], sum = 30
     Output: 2
@@ -47,7 +48,6 @@ Constraints:
     - 0 <= sum <= 104
     - 1 <= coins[i] <= 104
     - 1 <= coins.size() <= 103
-
 
 */ 
 
