@@ -15,7 +15,7 @@ using namespace std;
 */
 
 // # 1143. Longest Common Subsequence
-// https://PROBLEM.LINK
+// https://leetcode.com/problems/longest-common-subsequence/description/
 
 /*
 DESCRIPTION :
@@ -52,17 +52,23 @@ Constraints:
 
 class Solution {
     private:
-    int lcsRecursive(string a, string b, int n1, int n2) {
-        // Base case
-        if (n1 == 0 || n2 == 0)
+    int lcsRecursive(string a, string b, int n, int m) {
+        // Base case: If either string is empty, the LCS length is 0.
+        if (n == 0 || m == 0)
             return 0;
 
         // Choice Diagram
-        if (a[n1 - 1] == b[n2 - 1])
-            return 1 + lcsRecursive(a, b, n1-1, n2-1);
-        else    
-            return max(lcsRecursive(a, b, n1-1, n2), lcsRecursive(a, b, n1, n2-1));
-
+        if (a[n - 1] == b[m - 1]) {
+            // If they match, this character is part of the LCS.
+            // Add 1 and find LCS of the remaining prefixes.
+            return 1 + lcsRecursive(a, b, n-1, m-1);
+        }
+        else {   
+            // If they don't match, the LCS is the longer of:
+            // 1. LCS excluding the last char of 'a' (a[0...n-2], b[0...m-1])
+            // 2. LCS excluding the last char of 'b' (a[0...n-1], b[0...m-2)
+            return max(lcsRecursive(a, b, n-1, m), lcsRecursive(a, b, n, m-1));
+        }
         return -1;
     }
 
@@ -122,12 +128,15 @@ int main()
     string text1 = "abcde", text2 = "ace";
     string text3 = "abc", text4 = "abc";
     string text5 = "abc", text6 = "def";
+    string text7 = "cbazuxmhecthlegrpunkdmbppweqtgjoparmowzdqyoxytjbbhawdydcprjbxphoohpkwqyuhrqzhnbnfuvqnqqlrzjpxiogvliexdzuzosrkrusvojbrzmwzpowkjilefraamdigpnpuuhgxpqnjwjmwaxxmnsnhhlqqrzudltfzotcjtnzxuglsdsmzcnockvfajfrmxothowkbjzwucwljfrimpmyhchzriwkbarxbgfcbceyhjugixwtbvtrehbbcpxifbxvfbcgkcfqckcotzgkubmjrmbsztsshfroefwsjrxjhguzyupzwweiqurpixiqflduuveoowqcudhnefnjhaimuczfskuiduburiswtbrecuykabfcvkdzeztoidukuhjzefczzzbfkqdpqzikfobucdhthxdjgkjelrlpaxamceroswitdptpcclifkeljytihrcqaybnefxnxvgzedyyhngycdrudmphmeckotrwospofghfozqvlqfxwwkmfxdyygmdcaszsgovsodkjghcwmbmxrmhuyfyqgajqkcklznayxqkqoyzwmyubzazcpkhktkydzivcuypurfmbisgekyrgzvxdhpoamvafyrarxsvkhtqdihersigbhzjzujxmmyspnaraewkegjccvhhrjvbjtsqdjootgpknfpfycgfieowqrwwwpzsqmetogepspxnvjiupalyynmkmnuvklhsecdwracgfmzkgipdfodkjmjqwiqpuoqhimvfvuzwyvijgfullkj";
+    string text8 = "duhsjafbtlkmfqrmyjfjnhhssqctydteamdcjbprhtnegyiwxgcjwlgrsmeaearwtvjsjbaoiojlwhypnvruihoswkifygtydhacwyhsgewzmtgonzltjhgauhnihreqgjfwkjsmtpjhaefqzaauldrchjccdyrfvvrivuyeegfivdrcygurqdredakubnfguproqylobcwqxkzmausjgmhcmhgdnmphnqkamhurktrffaclvgrzkkldacllteojomonxrqyjzginrnnzwacxxaedrwudxzrfusewjtboxvynfhkstcenaumnddxfdmvzcautdcckxaaydzsxttobbgqngvvpjgojoglmkxgbfcpypckqchbddzwrxbzmqrlxvobtwhxginfgfrcclmznmjugwwbsqfcihubsjollmsqsghmcphelsotflbgsfnpcuzsrupchynvzhcpqugriwniqxdfjpwpxfblkpnpeelfjmtkuqpzomwnlmbupmktlptndmpdsydsgvfpenemwborifsuqhceskmkhssmvnonwafxwhgbibabvqopqfoviussqfqwehtxdzujtlntxmrjxxwtlggkytbiolydnilqadojskkvfxahhjmbocljarintdwcldvdxropbyjzwyyojuothwmlvrglfzdzdbtubxuoffvncrswsaznmoijoivvgobqpnckwvnhkebmtdhvygkjisuxhatmuudqbhmknhfxaxqxkjlzzqtsjfaeedfuujkolxjoqkdvfepvlhvhrwtfdukxffjpsswyxlijjhevryxozbafpfmowgrgonuatdqlahyggyljddjhmltedzlodsrkeutgtnkntarjkpxinovgzdthunwooxvjjmpsvknhkwjopmmlebksucvzqlyqn";
 
     // Method Invocation & Result Visualization
     cout << sol.longestCommonSubsequence(a, b) << endl;
     cout << sol.longestCommonSubsequence(text1, text2) << endl;
     cout << sol.longestCommonSubsequence(text3, text4) << endl;
     cout << sol.longestCommonSubsequence(text5, text6) << endl;
+    cout << sol.longestCommonSubsequence(text7, text8) << endl;
 
 
 
@@ -149,7 +158,7 @@ SOLUTIONS:-
 # TC: O(n * m) | SC: O(n * m) | Tabulation [Bottom-up]
     Time Complexity:  O(n * m) — Filling a DP table of size (n+1) x (m+1).
     Space Complexity: O(n * m) — For the DP table.
-    
+
 # TC: O() | SC: O() | Space-Optimized
     Time Complexity:  O()
     Space Complexity: O()
