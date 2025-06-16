@@ -34,6 +34,21 @@ Example-2:
     Output: 4 
     Explanation: All the possible subsets are [1], [1], [1] and [1]
 
+Example-3: 
+    Input: arr[] = [0, 0, 0], target = 0
+    Output: 8
+    Explanation: All the possible subsets are:
+    [], 
+    [0], [0], [0], 
+    [0, 0], [0, 0], [0, 0],
+    [0, 0, 0].
+
+
+Constraints:
+    - 1 ≤ n ≤ 10^3
+    - 0 ≤ arr[i] ≤ 10^3
+    - 0 ≤ target ≤ 10^3
+
 */ 
 
 
@@ -45,7 +60,7 @@ class Solution {
             return (sum == 0);  // Returns 1 if sum is also 0, 0 otherwise
         /*
         - Incorrect base case
-            if (sum == 0) return 1;
+            if (sum == 0) return 1; // This would return 1 if sum is 0, but when we have multiple zeros in the array, it does not account for all combinations. Thus we need to go deeper into the recursion to count all subsets that sum to zero.
             else if (n == 0) return 0;
 
             - Above base case does not work for case: 
@@ -62,6 +77,7 @@ class Solution {
     }
 
     int countOfSubsetSumMemoised(vector<int>& nums, int sum, int n, vector<vector<int>>& t) {
+        // if (sum == 0) return 1; // Go deeper, hence this base case is not needed
         if (n == 0)
             return (sum == 0);  // Returns 1 if sum is also 0, 0 otherwise
 

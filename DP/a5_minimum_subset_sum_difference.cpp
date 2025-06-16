@@ -36,6 +36,9 @@ Example 2:
     Output: 0
     Explanation: S1 = [1, 5, 5], sum = 11, S2 = [11], sum = 11, Absolute Difference (11 – 11) = 0     
 
+Constraints:
+    - 1 ≤ arr.size() * |sum of array elements| ≤ 10^5
+    - 1 <= arr[i] <= 10^5
 */ 
 
 

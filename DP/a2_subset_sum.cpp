@@ -34,6 +34,10 @@ Example 2:
     Output: False
     Explanation: There is no subset that add up to 30.
 
+Constraints:
+    - 1 <= arr.size() <= 200
+    - 1 <= arr[i] <= 200
+    - 1 <= sum <= 10^4
 */ 
 
 
