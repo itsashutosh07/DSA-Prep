@@ -13,6 +13,7 @@
 
 using namespace std;
 
+// Best case TC: O(N^2) | Average Case TC: O(N^2) | Worst Case TC: O(N^2) | SC: O(1) | Selection Sort
 void selectionSort(int arr[], int n)
 {
     // Brings minimums to start of array
@@ -28,6 +29,8 @@ void selectionSort(int arr[], int n)
     }
 }
 
+// Best case TC: O(N) | Average Case TC: O(N^2) | Worst Case TC: O(N^2) | SC: O(1) | Iterative Bubble Sort
+// Best case TC: O(N) | Average Case TC: O(N^2) | Worst Case TC: O(N^2) | SC: O(1) | Recursive Bubble Sort
 void bubbleSort(int arr[], int n)
 {
     // pushes maximums to the end of array by adjecent swappings
@@ -60,6 +63,8 @@ void bubbleSort(int arr[], int n)
     // bubbleSort(arr, n-1);
 }
 
+// Best case TC: O(N) | Average Case TC: O(N^2) | Worst Case TC: O(N^2) | SC: O(1) | Iterative Insertion Sort
+// Best case TC: O(N) | Average Case TC: O(N^2) | Worst Case TC: O(N^2) | SC: O(1) | Recursive Insertion Sort
 void insertionSort(int arr[], int n)
 {
     //takes an element[i: 1->n-1] & moves the element backward in sorted part of the array till it's inserted @ correct position
@@ -209,7 +214,7 @@ int quickSortPartition (int arr[], int low, int high)
 void quickSort(int arr[], int low, int high)
 {
     if (low < high) {
-        int pIndex = quickSortPartition(arr, low, high);
+        int pIndex = quickSortRandomizedPartition(arr, low, high);
         quickSort(arr, low, pIndex-1);
         quickSort(arr, pIndex+1, high);
     }
