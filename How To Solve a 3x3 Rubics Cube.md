@@ -48,10 +48,16 @@
 		2. If the piece falls to the right of the matched center, perform a #right-trigger.
 **Edge Cases**: If there are no white piece remaining on the top-layer that are facing outward, they can be only in two spots [the yellow center piece facing top]
 ###### Edge Case-1:Outward facing white sticker on the bottom layer
-- If the white sticker is on the right side, perform the #right-trigger  or else perform the #left-trigger .
+- Find the corner and check which side the white sticker is on.
+- If white is on the **right** → perform #right-trigger **once**.
+- If white is on the **left** → perform #left-trigger **once**.
+- This moves the corner to the top layer facing outward — then solve normally (Step-2).
 ###### Edge Case-2:
-- This brings us to our next edge case, white sticker on the top-face of the cube [the yellow center piece on top].
-- If
+1. Turn the **top face** until the top white sticker sits **directly above a non-white sticker** on the bottom (not above another white).
+2. Check which side the white sticker is on:
+   - If on the **right** → perform #right-trigger **twice**.
+   - If on the **left** → perform #left-trigger **twice**.
+3. The corner is now on the top layer facing outward — match its side color diagonally to its center and perform the appropriate trigger.
 
 ---
 ## Step-3: Complete the 2nd layer
