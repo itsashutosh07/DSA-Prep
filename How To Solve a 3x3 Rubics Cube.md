@@ -2,14 +2,14 @@
 ### Some Important Moves:
 ##### Right trigger: 
 #right-trigger 
-1. With right hand, rotate the the *right face clock-wise*.
+1. With right hand, rotate the *right face clock-wise*.
 2. Rotate the *top clock-wise*.
-3. With right hand, rotate the the *right face counter clock-wise*.
+3. With right hand, rotate the *right face counter clock-wise*.
 ##### Left trigger: 
 #left-trigger 
-1. With right hand, rotate the the *right face clock-wise*.
+1. With left hand, rotate the *left face clock-wise*.
 2. Rotate the *top clock-wise*.
-3. With right hand, rotate the the *right face counter clock-wise*.
+3. With left hand, rotate the *left face counter clock-wise*.
 
 ##### Righty algorithm
 \[#righty-algo = #right-trigger + top counter clock-wise]
@@ -37,7 +37,7 @@
 2. Form a daisy 
 	1. [yellow in between] + [white at the 4 edges]
 3. Match and rotate 180-degree
-	1. Match the the white-edge + other-color to the matching other-color center piece and rotate the matched piece a 180-degree
+	1. Match the white-edge + other-color to the matching other-color center piece and rotate the matched piece a 180-degree
 
 ---
 ## Step-2: Complete the 1st layer
@@ -131,7 +131,7 @@
 
 ---
 ## Step-6: Fix the Top Corners [Position]
-1. #nicklas : 2 pair algo
+1. #Niklas : 2 pair algo
 	1. Right - up + back
 	2. Left - up + back
 	3. Bring back right pair (1 step)
@@ -141,11 +141,11 @@
 2. Realign the edges on top.
 3. You should now have **1 corner** in the correct spot → go to Case-2.
 ###### Case-2: 1 aligned corners
-1. 1. Hold that correct corner at **front-left**.
-2. Perform 1 #nicklas 
+1. Hold that correct corner at **front-left**.
+2. Perform 1 #Niklas 
 3. Realign the edges.
 	1. You would either have all corners in correct spot
-	2. Else: Perform 1 #nicklas again. This would align all your corners perfectly.
+	2. Else: Perform 1 #Niklas again. This would align all your corners perfectly.
 
 ---
 ## Step-7: Orient the Top Corners [Final Step]
