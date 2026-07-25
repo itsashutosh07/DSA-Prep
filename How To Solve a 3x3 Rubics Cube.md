@@ -46,7 +46,9 @@
 	2. find the color adjacent to the white piece and find its matching center piece.
 		1. If the piece falls to the right of the matched center, perform a #left-trigger.
 		2. If the piece falls to the right of the matched center, perform a #right-trigger.
-**Edge Cases**: If there are no white piece remaining on the top-layer that are facing outward, they can be only in two spots [the yellow center piece facing top]
+
+**Edge Cases**: If no outward-facing white corners remain on the top layer, they are in one of these two spots.
+
 ###### Edge Case-1:Outward facing white sticker on the bottom layer
 - Find the corner and check which side the white sticker is on.
 - If white is on the **right** → perform #right-trigger **once**.
