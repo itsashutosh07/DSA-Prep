@@ -18,7 +18,6 @@
 3. Rotate the **right face counter clock-wise**.
 4. Rotate the **top counter clock-wise**.
 
-> Notation: **R U R' U'**  
 > (= #right-trigger + top Counter-ClockWise)
 
 ##### Lefty algorithm
@@ -28,7 +27,6 @@
 3. Rotate the **left face clock-wise**.
 4. Rotate the **top clock-wise**.
 
-> Notation: **L' U' L U**  
 > (= #left-trigger + top ClockWise)
 
 ---
@@ -44,7 +42,7 @@
 1. Find and fix the white corner pieces.
 	1. Find a white pieces on the top layer that is facing outward [the yellow center piece facing top]
 	2. find the color adjacent to the white piece and find its matching center piece.
-		1. If the piece falls to the right of the matched center, perform a #left-trigger.
+		1. If the piece falls to the left of the matched center, perform a #left-trigger.
 		2. If the piece falls to the right of the matched center, perform a #right-trigger.
 
 **Edge Cases**: If no outward-facing white corners remain on the top layer, they are in one of these two spots.
