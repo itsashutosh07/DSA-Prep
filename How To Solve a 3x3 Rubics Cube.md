@@ -91,7 +91,7 @@
 3. Perform righty-algo ( #right-trigger + top-CCW ).
 4. Rotate front back CCW.
 ###### Case-2: Hook on top
-1. Make the top hook face top left (like a mirror image of an -> \_| )
+1. Make the top hook face top left (like a mirror image of an L -> \_| )
 2. Rotate front CW.
 3. 2 x Perform righty-algo ( #right-trigger + top-CCW ).
 4. Rotate front back CCW.
@@ -112,7 +112,7 @@
 8. Turn the top layer and align as many yellow edges to their centers as you can.
 	- If **all 4 match** → skip to Step-6.
 ###### Case-1: Matching edges are **across** from each other
-- Hold yellow on top.
+- Hold yellow on top with line vertical like an I.
 - Perform **1 x #Sune**.
 - Realign the top — you should now have **2 adjacent** matching edges.
 
