@@ -47,7 +47,7 @@
 		1. If the piece falls to the right of the matched center, perform a #left-trigger.
 		2. If the piece falls to the right of the matched center, perform a #right-trigger.
 **Edge Cases**: If there are no white piece remaining on the top-layer that are facing outward, they can be only in two spots [the yellow center piece facing top]
-###### Edhe Case-1:Outward facing white sticker on the bottom layer
+###### Edge Case-1:Outward facing white sticker on the bottom layer
 - If the white sticker is on the right side, perform the #right-trigger  or else perform the #left-trigger .
 ###### Edge Case-2:
 - This brings us to our next edge case, white sticker on the top-face of the cube [the yellow center piece on top].
