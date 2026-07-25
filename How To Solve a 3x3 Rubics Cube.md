@@ -62,27 +62,27 @@
 3. The corner is now on the top layer facing outward — match its side color diagonally to its center and perform the appropriate trigger.
 
 ---
-## Step-3: Complete the 2nd layer
+## Step-3: Complete the 2nd Layer
 
-*Goal*: place all **middle-layer edge pieces**. When done, the **first two layers** are fully solved.
+**Goal**: Place all **middle-layer edge pieces**. When done, the **first two layers** are fully solved.
 
 1. Search the **top layer** for edge pieces with **no yellow** on them.
 2. Turn the top until the **side-facing color** of that edge matches its center — you should see an **upside-down T**.
 3. Look at the color on the **top face** of that edge piece:
-   4. If it matches the **right** center:
+   1. If it matches the **right** center:
       1. Pull the **top face towards you once** → **U**.
       2. Perform #right-trigger.
-   5. If it matches the **left** center:
-      1. Pull the **top face towards you once with left index** → **U'** (from the right-hand grip, this is one turn the other way).
+   2. If it matches the **left** center:
+      1. Pull the **top face towards you once with left index** → **U'**.
       2. Perform #left-trigger.
-6. Inserting an edge **displaces a white corner** to the top — fix it exactly like Step-2:
-   7. Find the displaced white corner on the top layer.
-   8. Diagonally match its side color to its center.
-   9. Use #left-trigger or #right-trigger as needed.
-10. Repeat until all 4 middle edges are in place.
+4. Inserting an edge **displaces a white corner** to the top — fix it exactly like Step-2:
+   1. Find the displaced white corner on the top layer.
+   2. Diagonally match its side color to its center.
+   3. If the corner is to the **left** of the matched center → #left-trigger.
+   4. If the corner is to the **right** of the matched center → #right-trigger.
+5. Repeat until all 4 middle edges are in place.
 
 ###### Edge Case: No yellow-free edges on top, but middle layer still wrong
-
 - A wrong edge is stuck in the middle layer.
 - Hold it on the **right** → perform #right-trigger to **kick it out** to the top.
 - Hold it on the **left** → perform #left-trigger to **kick it out** to the top.
