@@ -59,13 +59,39 @@ Constraints:
 */ 
 
 
-class Solution {
-public:
-    bool lemonadeChange(vector<int>& bills) {
+class Solution{    
+  public:    
+    bool lemonadeChange(vector<int>& bills){
         //your code goes here
+        int $5 = 0, $10 = 0;
+        for (int i = 0; i < bills.size(); i++) {
+            if (bills[i] == 20) {
+                if ($5 > 0 && $10 > 0) {
+                    $5--; $10--;
+                }
+                else if ($5 >= 3 && $10 <= 0) {
+                    $5 -= 3;
+                }
+                else {
+                    return false;
+                }
+            }
+            else if (bills[i] == 10) {
+                if ($5 > 0) {
+                    $5--;
+                }
+                else {
+                    return false;
+                }
+                $10++;
+            }
+            else {
+                $5++;
+            }
+        }
+        return true;
     }
 };
-
 
 int main() 
 {
