@@ -54,18 +54,35 @@ Constraints:
 
 
 class Solution {
+private:
+
+    int solve(vector<int>& student, vector<int>& cookie, int i, int j) {
+        if (i == student.size() || j == cookie.size())
+            return 0;
+        if (cookie[j] < student[i])
+            return solve(student, cookie, i, j + 1);
+        return max(
+            1 + solve(student, cookie, i + 1, j + 1),
+            solve(student, cookie, i, j + 1)
+        );
+    }
+
 public:
-    int findMaximumCookieStudents1(vector<int>& Student, vector<int>& Cookie) {
-        //your code goes here
+
+    int findMaximumCookieStudents1(vector<int>& student, vector<int>& cookie) {
+        sort(student.begin(), student.end());
+        sort(cookie.begin(), cookie.end());
+        return solve(student, cookie, 0, 0);
     }
 
-    int findMaximumCookieStudents2(vector<int>& Student, vector<int>& Cookie) {
-        //your code goes here
-    }
+    // int findMaximumCookieStudents2(vector<int>& Student, vector<int>& Cookie) {
+    //     //your code goes here
+    // }
 
-    int findMaximumCookieStudents3(vector<int>& Student, vector<int>& Cookie) {
-        //your code goes here
-    }
+    // int findMaximumCookieStudents3(vector<int>& Student, vector<int>& Cookie) {
+    //     //your code goes here
+        
+    // }
 };
 
 
@@ -76,6 +93,10 @@ int main()
     // Input Initialization
     vector<int> student1 = {1, 2, 3};
     vector<int> cookie1 = {1, 1};
+
+    vector<int> student2 = {1, 2};
+    vector<int> cookie2 = {1, 2, 3};
+
     vector<int> student2 = {1, 2};
     vector<int> cookie2 = {1, 2, 3};
 
@@ -84,11 +105,11 @@ int main()
     cout << sol.findMaximumCookieStudents1(student1, cookie1) << endl;
     cout << sol.findMaximumCookieStudents1(student2, cookie2) << endl;
 
-    cout << sol.findMaximumCookieStudents2(student1, cookie1) << endl;
-    cout << sol.findMaximumCookieStudents2(student2, cookie2) << endl;
+    // cout << sol.findMaximumCookieStudents2(student1, cookie1) << endl;
+    // cout << sol.findMaximumCookieStudents2(student2, cookie2) << endl;
 
-    cout << sol.findMaximumCookieStudents3(student1, cookie1) << endl;
-    cout << sol.findMaximumCookieStudents3(student2, cookie2) << endl;
+    // cout << sol.findMaximumCookieStudents3(student1, cookie1) << endl;
+    // cout << sol.findMaximumCookieStudents3(student2, cookie2) << endl;
 
 
     return 0;

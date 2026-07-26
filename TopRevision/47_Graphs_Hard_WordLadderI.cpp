@@ -42,13 +42,38 @@ Constraints:
 */ 
 
 
-class Solution {
+class Solution{
 public:
-    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        //your code goes here
+    int wordLadderLength(string startWord, string targetWord, vector<string> &wordList) {
+        unordered_set<string> words(wordList.begin(), wordList.end());
+        queue<pair<string, int>> q;
+
+        q.push({startWord, 1});
+        
+        while (!q.empty()) {
+            string curr = q.front().first;
+            int level = q.front().second;
+            q.pop();
+
+            if (curr == targetWord)
+                return level;
+
+            int len = curr.size();
+            for (int i = 0; i < len; i++) {
+                string temp = curr; 
+                for (int alpha = 'a'; alpha <= 'z'; alpha++) {
+                    temp[i] = alpha;
+                    if (words.find(temp) != words.end()) {
+                        words.erase(temp);
+                        q.push({temp, level+1});
+                    }
+                }
+            }
+        }
+
+        return 0;
     }
 };
-
 
 int main() 
 {
@@ -57,10 +82,12 @@ int main()
     // Input Initialization
     vector<string> wl1 = {"hot", "dot", "dog", "lot", "log", "cog"};
     vector<string> wl2 = {"hot", "dot", "dog", "lot", "log"};
+    vector<string> wl3 = {"des","der","dfr","dgt","dfs"};
 
     // Method Invocation & Result Visualization
-    cout << sol.ladderLength("hit", "cog", wl1) << endl;
-    cout << sol.ladderLength("hit", "cog", wl2) << endl;
+    cout << sol.wordLadderLength("hit", "cog", wl1) << endl;
+    cout << sol.wordLadderLength("hit", "cog", wl2) << endl;
+    cout << sol.wordLadderLength("dfs", "der", wl3) << endl;
 
     return 0;
 }
