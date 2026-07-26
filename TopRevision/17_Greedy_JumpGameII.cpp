@@ -57,6 +57,7 @@ class Solution {
 public:
     int jump1(vector<int>& nums) {
         //your code goes here
+        
     }
 
     int jump2(vector<int>& nums) {

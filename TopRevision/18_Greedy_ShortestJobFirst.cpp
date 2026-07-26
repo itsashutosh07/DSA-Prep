@@ -51,12 +51,23 @@ Constraints:
 
 
 class Solution {
-public:
+  public:
     long long solve(vector<int>& bt) {
         //your code goes here
+        // BT: 1 2 3 4 7
+        // WT: 0 1 3 6 10 => 0+1+3+6+10 = 20/5 = 4
+        long long totalTime = 0, waitTime = 0, processes = bt.size();
+        sort(bt.begin(), bt.end());
+
+
+        for (int i = 0; i < processes; i++) {
+            waitTime += totalTime; // before execting each process, add up the curr total time to the total wait times, before execution of this process
+            totalTime += bt[i]; // execute the process -> add up the bt[i]
+        }
+
+        return (long long) waitTime / (long long) processes;
     }
 };
-
 
 int main() 
 {
