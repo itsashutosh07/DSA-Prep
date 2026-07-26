@@ -1,0 +1,41 @@
+# IDE / editor
+.vscode/
+.idea/
+*.code-workspace
+Prep.code-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Compiled C/C++ objects & debug symbols
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.exe
+*.out
+a.out
+*.dSYM/
+*.app
+
+# TopRevision: keep sources only; ignore extensionless build binaries
+# (e.g. TopRevision/44_Graphs_Hard_AlienDictionary next to the .cpp)
+TopRevision/*
+!TopRevision/*/
+!TopRevision/*.cpp
+!TopRevision/*.hpp
+!TopRevision/*.h
+!TopRevision/*.hh
+!TopRevision/*.md
+!TopRevision/.gitkeep
+
+# Generic build / temp
+build/
+cmake-build-*/
+compile_commands.json
+*.swp
+*.swo
+*~
