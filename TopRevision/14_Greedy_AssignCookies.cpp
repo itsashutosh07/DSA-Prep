@@ -56,14 +56,13 @@ Constraints:
 class Solution {
 private:
 
-    int solve(vector<int>& student, vector<int>& cookie, int i, int j) {
-        if (i == student.size() || j == cookie.size())
+    int satisfiedStudents(vector<int>& student, vector<int>& cookie, int stdPtr, int cookiePtr) {
+        if (stdPtr == student.size() || cookiePtr == cookie.size())
             return 0;
-        if (cookie[j] < student[i])
-            return solve(student, cookie, i, j + 1);
-        return max(
-            1 + solve(student, cookie, i + 1, j + 1),
-            solve(student, cookie, i, j + 1)
+        if (cookie[cookiePtr] < student[stdPtr])
+            return satisfiedStudents(student, cookie, stdPtr, cookiePtr + 1);
+        return max(1 + satisfiedStudents(student, cookie, stdPtr + 1, cookiePtr + 1),
+                satisfiedStudents(student, cookie, stdPtr, cookiePtr + 1)
         );
     }
 
@@ -75,14 +74,29 @@ public:
         return solve(student, cookie, 0, 0);
     }
 
-    // int findMaximumCookieStudents2(vector<int>& Student, vector<int>& Cookie) {
-    //     //your code goes here
-    // }
+    int findMaximumCookieStudents2(vector<int>& student, vector<int>& cookie){
+        //your code goes here
+        sort(student.begin(), student.end());
+        sort(cookie.begin(), cookie.end());
 
-    // int findMaximumCookieStudents3(vector<int>& Student, vector<int>& Cookie) {
-    //     //your code goes here
-        
-    // }
+        int stdPtr = 0, cookiePtr = 0;
+        int stdSize = student.size(), cookieSize = cookie.size();
+
+        while (stdPtr < stdSize && cookiePtr < cookieSize) {
+            int currStd = student[stdPtr], currCookie = cookie[cookiePtr];
+
+            if (currStd <= currCookie) {
+                stdPtr++;
+                cookiePtr++;
+            }
+            else {
+                cookiePtr++;
+            }
+        }
+
+        return stdPtr;
+    }
+
 };
 
 
@@ -97,20 +111,13 @@ int main()
     vector<int> student2 = {1, 2};
     vector<int> cookie2 = {1, 2, 3};
 
-    vector<int> student2 = {1, 2};
-    vector<int> cookie2 = {1, 2, 3};
-
 
     // Method Invocation & Result Visualization
     cout << sol.findMaximumCookieStudents1(student1, cookie1) << endl;
     cout << sol.findMaximumCookieStudents1(student2, cookie2) << endl;
 
-    // cout << sol.findMaximumCookieStudents2(student1, cookie1) << endl;
-    // cout << sol.findMaximumCookieStudents2(student2, cookie2) << endl;
-
-    // cout << sol.findMaximumCookieStudents3(student1, cookie1) << endl;
-    // cout << sol.findMaximumCookieStudents3(student2, cookie2) << endl;
-
+    cout << sol.findMaximumCookieStudents2(student1, cookie1) << endl;
+    cout << sol.findMaximumCookieStudents2(student2, cookie2) << endl;
 
     return 0;
 }
@@ -122,10 +129,7 @@ SOLUTIONS:-
 1. TC: O(n*m) | SC: O(n*m) + O(n+m) | Memoization
     # Recursion + DP
 
-2. TC: O(n*m) | SC: O(n*m) | Tabulation
-    # Bottom-up DP
-
-3. TC: O(n*logn + m*logm) | SC: O(1) | OPTIMIZED
+2. TC: O(n*logn + m*logm) | SC: O(1) | OPTIMIZED
     # Greedy (sort + two pointer)
 
 */
